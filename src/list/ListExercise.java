@@ -2,7 +2,6 @@ package list;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 import application.Exercise;
@@ -124,15 +123,15 @@ public class ListExercise extends Exercise {
 
 			boolean bandera_2 = true;
 			while (bandera_2) {
-				System.out.println("\n¿Repeat operation? (yes / no)");
+				System.out.println("\n¿Repeat operation? (y / n)");
 				String rep = scanner.nextLine().toLowerCase();
-				if (rep.equals("no")) {
+				if (rep.equals("n")) {
 					bandera = false;
 					bandera_2 = false;
 					System.out.println("\nGoing back to menu");
 					currentPhase = 0;  //Esto es para que en la próxima pasada del while me lleve al menu
 				} else {
-					if (rep.equals("yes")) {
+					if (rep.equals("y")) {
 						System.out.println("\nRepeating operation...");
 						bandera_2 = false;
 					} else {
@@ -160,14 +159,13 @@ public class ListExercise extends Exercise {
 				printList();
 			}
 			else {
-
-				System.out.println("\nElement not found");
+				System.out.println("\nIndex does not exist");
 			}
 
 		//preguntar si repito operacion
 			boolean bandera_2 = true;
 
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				System.out.println("\nList is empty");
 				bandera_2 = false;
 				bandera = false;
@@ -175,9 +173,9 @@ public class ListExercise extends Exercise {
 			}
 
 			while (bandera_2){
-				System.out.println("\n¿Repeat operation? (yes / no)");
+				System.out.println("\n¿Repeat operation? (y / n)");
 				String rep = scanner.nextLine().toLowerCase();
-				if (rep.equals("no"))
+				if (rep.equals("n"))
 				{
 					bandera = false;
 					bandera_2 = false;
@@ -185,7 +183,7 @@ public class ListExercise extends Exercise {
 					currentPhase = 0;
 				}
 				else  {
-					if (rep.equals("yes")){
+					if (rep.equals("y")){
 						System.out.println("\nRepeating operation...");
 						bandera_2 = false;
 					}
@@ -221,9 +219,9 @@ public class ListExercise extends Exercise {
 
 			boolean bandera_2 = true;
 			while (bandera_2){
-				System.out.println("\n¿Repeat operation? (yes / no)");
+				System.out.println("\n¿Repeat operation? (y / n)");
 				String rep = scanner.nextLine().toLowerCase();
-				if (rep.equals("no"))
+				if (rep.equals("n"))
 				{
 					bandera = false;
 					bandera_2 = false;
@@ -231,7 +229,7 @@ public class ListExercise extends Exercise {
 					currentPhase = 0;
 				}
 				else  {
-					if (rep.equals("yes")){
+					if (rep.equals("y")){
 						System.out.println("\nRepeating operation...");
 						bandera_2 = false;
 					}
