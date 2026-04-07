@@ -70,44 +70,86 @@ public class SimpleLinkedList<E> implements SimpleList<E> {
 
         validateIndex(index);
         LinkedNode<E> nodeToRemove = getNodeByIndex(index);
+        E removedValue = nodeToRemove.value;
 
+        if (size == 1) {
+            // Lista queda vacía
+            first = null;
+            last = null;
+        } else if (index == 0) {
+            // Removemos el primero
+            first = nodeToRemove.next;
+            first.prev = null;
+        } else if (index == size - 1) {
+            // Removemos el último
+            last = nodeToRemove.prev;
+            last.next = null;
+        } else {
+            // Removemos un nodo intermedio
+            nodeToRemove.prev.next = nodeToRemove.next;
+            nodeToRemove.next.prev = nodeToRemove.prev;
+        }
 
-        return null;
+        size--;
+        return removedValue;
     }
 
     @Override
     public boolean remove(Object object) {
+        LinkedNode<E> current = first;
+        int index = 0;
+        while (current != null) {
+            if (current.value.equals(object)) {
+                remove(index);
+                return true;
+            }
+            current = current.next;
+            index++;
+        }
         return false;
     }
 
     @Override
     public void clear() {
-
+        first = null;
+        last = null;
+        size = 0;
     }
 
     @Override
     public boolean contains(Object object) {
+        LinkedNode<E> current = first;
+        while (current != null) {
+            if (current.value.equals(object))
+                return true;
+            current = current.next;
+        }
         return false;
     }
 
     @Override
     public E get(int index) {
-        return null;
+        validateIndex(index);
+        return getNodeByIndex(index).value;
     }
 
     @Override
     public E set(int index, E element) {
-        return null;
+        validateIndex(index);
+        LinkedNode<E> node = getNodeByIndex(index);
+        E oldValue = node.value;
+        node.value = element;
+        return oldValue;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     private void validateIndex(int index)

@@ -1,7 +1,5 @@
 package list;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import application.Exercise;
@@ -10,13 +8,13 @@ public class ListExercise extends Exercise {
 	
 	private int currentPhase = 0;
 	private boolean firstTime = true;
-	private List<String> list;
+	private SimpleList<String> list;
 	
 	
 	public ListExercise(Scanner scnr) {
 			
 		super(scnr);
-		list = new ArrayList<>();
+		list = new SimpleLinkedList<>();
 		
 	}
 	
