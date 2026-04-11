@@ -8,9 +8,18 @@ public class SimpleArrayQueue<E> implements SimpleQueue<E> {
     private static final int DEFAULT_CAPACITY = 4;
     private int size = 0;
 
+    @SuppressWarnings("unchecked")
+    public SimpleArrayQueue() {
+        elements = (E[]) new Object[DEFAULT_CAPACITY];
+    }
+
     @Override
     public void enqueue(E element) {
-
+        if (size == elements.length) {
+            resize();
+        }
+        elements[size] = element;
+        size++;
     }
 
     @Override
@@ -49,5 +58,15 @@ public class SimpleArrayQueue<E> implements SimpleQueue<E> {
             elements[i] = elements[i + 1];
 
         elements[size - 1] = null;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void resize() {
+        int newCapacity = elements.length * 2;
+        E[] newElements = (E[]) new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[i];
+        }
+        elements = newElements;
     }
 }

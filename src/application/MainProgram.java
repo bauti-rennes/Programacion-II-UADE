@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import list.ListExercise;
 import queueModule.QueueExercise;
+import stackModule.StackExercise;
 
 //Acá definimos la clase
 public class MainProgram {
@@ -58,8 +59,9 @@ public class MainProgram {
 				"\n0 - Terminate Program" +
 				"\n1 - Test Exercise"+
 				"\n2 - List Exercise"+
-				"\n3 - Stack Exercise");
-		
+				"\n3 - Stack Exercise" +
+				"\n4 - Queue Exercise");
+
 		//Esto es para almacenar en un string lo que puso el usuario
 		String userInput = scanner.nextLine();
 		
@@ -76,11 +78,11 @@ public class MainProgram {
 			exercise = new ListExercise(scanner);
 			break;
 		case "3":
+			exercise = new StackExercise(scanner);
 			break;
-			exercise = new ListExercise(scanner);
 		case "4":
-			break;
 			exercise = new QueueExercise(scanner);
+			break;
 		default:
 			//Esto sería como el "else" de python
 			System.out.println("Invalid input, try again");

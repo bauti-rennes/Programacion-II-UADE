@@ -47,9 +47,6 @@ public class StackExercise extends Exercise {
         if (firstTime) {
             firstTime = false;
             System.out.println("\nWelcome to the List Exercise");
-        } else {
-            printList();
-
         }
 
         System.out.println("Choose an option:"
@@ -86,25 +83,7 @@ public class StackExercise extends Exercise {
 
     }
 
-    private void printList() {
-
-        String fullList = "";
-
-        for (int i = 0; i < stack.size(); i++) //(contador, condición que se tiene que cumplir, paso del contador)
-        {
-            fullList += stack.get(i);
-
-            if (i < stack.size() - 1) {
-                fullList += ", ";
-            }
-
-        }
-        System.out.println("\nCurrent List: " + fullList);
-    }
-
-
-
-    private void pushLogic() //con el Scanner ponemos un dato y depsués lo agregamos a la lista
+        private void pushLogic() //con el Scanner ponemos un dato y depsués lo agregamos a la lista
     {
         boolean bandera = true;
 
@@ -112,9 +91,8 @@ public class StackExercise extends Exercise {
             System.out.println("\nEnter a string to add:");
             String element = scanner.nextLine();
             stack.push(element);
-            System.out.println("\n" + element + "added correctly"); //añade el dato que ingresa el usaurio
+            System.out.println("\n" + element + " added correctly"); //añade el dato que ingresa el usaurio
 
-            printList();
             //preguntar si repito operacion
 
             boolean bandera_2 = true;
@@ -186,6 +164,8 @@ public class StackExercise extends Exercise {
 
         String element = stack.peek();
         System.out.printf("\n" + element + " was at the top");
+        currentPhase = 0;
+        return;
     }
 
 

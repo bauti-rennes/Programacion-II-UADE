@@ -46,12 +46,9 @@ public class QueueExercise extends Exercise {
         if (firstTime) {
             firstTime = false;
             System.out.println("\nWelcome to the Queue Exercise");
-        } else {
-            printList();
-
         }
 
-        System.out.println("Choose an option:"
+        System.out.println("\nChoose an option:"
                 + "\nenqueue: Add element at the end of the Queue "
                 + "\ndequeue: Remove and show first element "
                 + "\npeek: Show the first element of the Queue "
@@ -85,23 +82,6 @@ public class QueueExercise extends Exercise {
 
     }
 
-    private void printList() {
-
-        String fullList = "";
-
-        for (int i = 0; i < queue.size(); i++) //(contador, condición que se tiene que cumplir, paso del contador)
-        {
-            fullList += queue.get(i);
-
-            if (i < queue.size() - 1) {
-                fullList += ", ";
-            }
-
-        }
-        System.out.println("\nCurrent List: " + fullList);
-    }
-
-
 
     private void enqueueLogic() //con el Scanner ponemos un dato y depsués lo agregamos a la lista
     {
@@ -111,9 +91,8 @@ public class QueueExercise extends Exercise {
             System.out.println("\nEnter a string to add:");
             String element = scanner.nextLine();
             queue.enqueue(element);
-            System.out.println("\n" + element + "added correctly"); //añade el dato que ingresa el usaurio
+            System.out.println("\n" + element + " added correctly"); //añade el dato que ingresa el usaurio
 
-            printList();
             //preguntar si repito operacion
 
             boolean bandera_2 = true;
@@ -139,8 +118,6 @@ public class QueueExercise extends Exercise {
 
     }
 
-
-
     private void dequeueLogic()
     {
 
@@ -148,13 +125,13 @@ public class QueueExercise extends Exercise {
         //Si no existe o está vacía no se puede remover
         if(queue == null || queue.isEmpty()){
 
-            System. out. println("\nStack is null or empty");
+            System. out. println("\nQueue is null or empty");
             currentPhase = 0;
             return;
         }
 
         String element = queue.dequeue();
-        System.out.printf("\n" + element + "successfully removed");
+        System.out.printf("\n" + element + " successfully removed");
 
         boolean validInput = false;
 
@@ -171,7 +148,7 @@ public class QueueExercise extends Exercise {
                     currentPhase = 0;
                     break;
                 default:
-                    System. out.println("nInvalid Input, try again");
+                    System. out.println("\nInvalid Input, try again");
                     break;
             }
         }
@@ -179,33 +156,35 @@ public class QueueExercise extends Exercise {
 
     public void peekLogic(){
         if(queue == null || queue.isEmpty() ) {
-            System.out.println("\nStack is null or empty, return to main menu");
+            System.out.println("\nQueue is null or empty, return to main menu");
             currentPhase = 0;
             return;
         }
 
         String element = queue.peek();
-        System.out.printf("\n" + element + " was at the top");
+        System.out.printf("\n" + element + " was at the front");
+        currentPhase = 0;
+        return;
     }
 
 
     public void clearLogic() {
         if(queue == null || queue.isEmpty() ) {
-            System.out.println("\nStack is null or empty, return to main menu");
+            System.out.println("\nQueue is null or empty, return to main menu");
 
         } else {
             queue.clear();
-            System.out.println("\nStack now is empty, returning to main menu");
+            System.out.println("\nQueue now is empty, returning to main menu");
         }
+        currentPhase = 0;
+        return;
     }
 
     private void printStatus(){
         String isEmptyString = "";
-        if(queue.isEmpty()) isEmptyString = "\nStack is empty.";
-        else isEmptyString = "\nStack isn't empty.";
-        System.out.println("Stack size: " + queue.size());
+        if(queue.isEmpty()) isEmptyString = "\nQueue is empty.";
+        else isEmptyString = "\nQueue isn't empty.";
+        System.out.println("Queue size: " + queue.size());
     }
 
 }
-
-
