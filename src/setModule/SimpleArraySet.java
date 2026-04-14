@@ -77,13 +77,13 @@ public class SimpleArraySet<E> implements SimpleSet<E> {
     public void clear() {
 
         //Sobrescrivo el conjunto por uno nuevo
-        elements = (E[] new Object[DEFAULT_CAPACITY]);
+        elements = ((E[]) new Object[DEFAULT_CAPACITY]);
     }
 
     @Override
     public E[] toArray() {
         //Cómo creamos un array que contenga todos los elementos del set?
-        E[] result = (E() new Object[size]);
+        E[] result = (E[]) new Object[size];
 
         for (int i = 0; i < size;i++){
             result[i] = elements[i];
