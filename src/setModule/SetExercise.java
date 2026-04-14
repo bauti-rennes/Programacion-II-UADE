@@ -34,27 +34,27 @@ public class SetExercise extends Exercise {
 
         if (firstTime) {
             firstTime = false;
-            System.out.println("\nWelcome to the Set Exercise!");
+            System.out.println("\n¡Bienvenido al ejercicio de Conjuntos!");
         }
 
-        System.out.println("\n--- Set A ---"
-                + "\n  Elements: " + Arrays.toString(setA.toArray())
-                + "\n  Size: " + setA.size()
-                + "\n  Empty: " + setA.isEmpty());
+        System.out.println("\n--- Conjunto A ---"
+                + "\n  Elementos: " + Arrays.toString(setA.toArray())
+                + "\n  Tamaño: " + setA.size()
+                + "\n  Vacío: " + setA.isEmpty());
 
-        System.out.println("\n--- Set B ---"
-                + "\n  Elements: " + Arrays.toString(setB.toArray())
-                + "\n  Size: " + setB.size()
-                + "\n  Empty: " + setB.isEmpty());
+        System.out.println("\n--- Conjunto B ---"
+                + "\n  Elementos: " + Arrays.toString(setB.toArray())
+                + "\n  Tamaño: " + setB.size()
+                + "\n  Vacío: " + setB.isEmpty());
 
-        System.out.println("\nChoose an option:"
-                + "\na: Work on Set A"
-                + "\nb: Work on Set B"
-                + "\nunion: Show A union B"
-                + "\nintersect: Show A intersect B"
-                + "\ndiff-ab: Show A difference B"
-                + "\ndiff-ba: Show B difference A"
-                + "\nmm: Main menu");
+        System.out.println("\nElegí una opción:"
+                + "\na: Trabajar con el Conjunto A"
+                + "\nb: Trabajar con el Conjunto B"
+                + "\nunion: Mostrar A unión B"
+                + "\nintersect: Mostrar A intersección B"
+                + "\ndiff-ab: Mostrar A diferencia B"
+                + "\ndiff-ba: Mostrar B diferencia A"
+                + "\nmm: Menú principal");
 
         String userInput = scanner.nextLine().toLowerCase();
 
@@ -71,36 +71,36 @@ public class SetExercise extends Exercise {
                 break;
             case "union":
                 SimpleSet<String> union = setA.unionWith(setB);
-                System.out.println("\nA union B: " + Arrays.toString(union.toArray()));
+                System.out.println("\nA unión B: " + Arrays.toString(union.toArray()));
                 break;
             case "intersect":
                 SimpleSet<String> intersect = setA.intersectWith(setB);
-                System.out.println("\nA intersect B: " + Arrays.toString(intersect.toArray()));
+                System.out.println("\nA intersección B: " + Arrays.toString(intersect.toArray()));
                 break;
             case "diff-ab":
                 SimpleSet<String> diffAB = setA.differenceWith(setB);
-                System.out.println("\nA difference B: " + Arrays.toString(diffAB.toArray()));
+                System.out.println("\nA diferencia B: " + Arrays.toString(diffAB.toArray()));
                 break;
             case "diff-ba":
                 SimpleSet<String> diffBA = setB.differenceWith(setA);
-                System.out.println("\nB difference A: " + Arrays.toString(diffBA.toArray()));
+                System.out.println("\nB diferencia A: " + Arrays.toString(diffBA.toArray()));
                 break;
             case "mm":
                 running = false;
                 break;
             default:
-                System.out.println("\nInvalid option, try again");
+                System.out.println("\nOpción inválida, intentá de nuevo");
                 break;
         }
     }
 
     private void selectSetLogic() {
-        System.out.println("\nWorking on Set " + selectedSetName
-                + "\n  Elements: " + Arrays.toString(selectedSet.toArray())
-                + "\nChoose an option:"
-                + "\nadd: Add element"
-                + "\nremove: Remove element"
-                + "\nback: Back to main menu");
+        System.out.println("\nTrabajando con el Conjunto " + selectedSetName
+                + "\n  Elementos: " + Arrays.toString(selectedSet.toArray())
+                + "\nElegí una opción:"
+                + "\nadd: Agregar elemento"
+                + "\nremove: Eliminar elemento"
+                + "\nback: Volver al menú principal");
 
         String userInput = scanner.nextLine().toLowerCase();
 
@@ -115,7 +115,7 @@ public class SetExercise extends Exercise {
                 currentPhase = 0;
                 break;
             default:
-                System.out.println("\nInvalid option, try again");
+                System.out.println("\nOpción inválida, intentá de nuevo");
                 break;
         }
     }
@@ -123,11 +123,11 @@ public class SetExercise extends Exercise {
     private void addLogic() {
         boolean repeat = true;
         while (repeat) {
-            System.out.println("\nEnter element to add to Set " + selectedSetName + ":");
+            System.out.println("\nIngresá el elemento a agregar al Conjunto " + selectedSetName + ":");
             String element = scanner.nextLine();
             boolean success = selectedSet.add(element);
-            if (success) System.out.println("\n'" + element + "' added successfully.");
-            else         System.out.println("\n'" + element + "' already exists in Set " + selectedSetName + ", not added.");
+            if (success) System.out.println("\n'" + element + "' agregado correctamente.");
+            else         System.out.println("\n'" + element + "' ya existe en el Conjunto " + selectedSetName + ", no se agregó.");
 
             repeat = askRepeat();
         }
@@ -137,11 +137,11 @@ public class SetExercise extends Exercise {
     private void removeLogic() {
         boolean repeat = true;
         while (repeat) {
-            System.out.println("\nEnter element to remove from Set " + selectedSetName + ":");
+            System.out.println("\nIngresá el elemento a eliminar del Conjunto " + selectedSetName + ":");
             String element = scanner.nextLine();
             boolean success = selectedSet.remove(element);
-            if (success) System.out.println("\n'" + element + "' removed successfully.");
-            else         System.out.println("\n'" + element + "' was not found in Set " + selectedSetName + ".");
+            if (success) System.out.println("\n'" + element + "' eliminado correctamente.");
+            else         System.out.println("\n'" + element + "' no fue encontrado en el Conjunto " + selectedSetName + ".");
 
             repeat = askRepeat();
         }
@@ -150,11 +150,11 @@ public class SetExercise extends Exercise {
 
     private boolean askRepeat() {
         while (true) {
-            System.out.println("\nRepeat operation? (y / n)");
+            System.out.println("\n¿Repetir operación? (y / n)");
             String input = scanner.nextLine().toLowerCase();
             if (input.equals("y")) return true;
             if (input.equals("n")) return false;
-            System.out.println("\nInvalid answer");
+            System.out.println("\nRespuesta inválida");
         }
     }
 }
