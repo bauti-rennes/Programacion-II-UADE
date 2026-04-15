@@ -82,26 +82,28 @@ public class SimpledLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
 
     @Override
     public E peek() {
-        return null;
+        return (E) first;
     }
 
     @Override
     public int getHighestPriority() {
-        return 0;
+        return first.priority;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override
     public void clear() {
-
+        first = null;
+        last = null;
+        size = 0;
     }
 }
