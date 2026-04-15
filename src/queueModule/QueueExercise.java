@@ -1,8 +1,6 @@
 package queueModule;
 
 import application.Exercise;
-import stackModule.SimpleArrayStack;
-import stackModule.SimpleStack;
 
 import java.util.Scanner;
 
