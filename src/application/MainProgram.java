@@ -4,6 +4,7 @@ package application;
 import java.util.Scanner;
 
 import list.ListExercise;
+import priorityQueueModule.PriorityQueueExercise;
 import queueModule.QueueExercise;
 import setModule.SetExercise;
 import stackModule.StackExercise;
@@ -62,7 +63,8 @@ public class MainProgram {
 				"\n2 - List Exercise"+
 				"\n3 - Stack Exercise" +
 				"\n4 - Queue Exercise" +
-				"\n5 - Set Exercise");
+				"\n5 - Set Exercise" + 
+				"\n6 - Priority Queue Exercise");
 
 		//Esto es para almacenar en un string lo que puso el usuario
 		String userInput = scanner.nextLine();
@@ -87,6 +89,9 @@ public class MainProgram {
 			break;
 		case "5":
 			exercise = new SetExercise(scanner);
+			break;
+		case "6":
+			exercise = new PriorityQueueExercise(scanner);
 			break;
 		default:
 			//Esto sería como el "else" de python

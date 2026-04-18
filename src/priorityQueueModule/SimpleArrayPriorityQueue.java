@@ -37,7 +37,7 @@ public class SimpleArrayPriorityQueue<E> implements SimplePriorityQueue<E> {
 
         int insertIndex = size;
 
-        for(int i = size; i > 0 && priority < priorities[i]; i--) { //Empiezo por la derecha y voy moviendo elemento por elemento 1 posicion a la derecha
+        for(int i = size; i > 0 && priority < priorities[i-1]; i--) { //Empiezo por la derecha y voy moviendo elemento por elemento 1 posicion a la derecha
 
             //Correr el elemento a la derecha
             elements[i] = elements[i-1];
@@ -47,10 +47,9 @@ public class SimpleArrayPriorityQueue<E> implements SimplePriorityQueue<E> {
 
         }
 
-        size++;
         elements[insertIndex] = element;
         priorities[insertIndex] = priority;
-        size ++;
+        size++;
     }
 
     @Override
@@ -90,8 +89,8 @@ public class SimpleArrayPriorityQueue<E> implements SimplePriorityQueue<E> {
             priorities[i] = priorities[i + 1];
         }
 
-        elements[size - 1] = null; //nulleamos el ultimo porque es una referencia a un objeto --> ese objeto me quedaría en memoria cuando no lo quiero
-        priorities[size - 1] = Integer.parseInt(null);
+        elements[size - 1] = null;
+        priorities[size - 1] = 0;
     }
 
     @SuppressWarnings("unchecked")

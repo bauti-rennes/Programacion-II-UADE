@@ -1,8 +1,9 @@
 package priorityQueueModule;
 
 import application.Exercise;
-import priorityQueueModule.SimpleArrayPriorityQueue;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class PriorityQueueExercise extends Exercise {
@@ -49,7 +50,7 @@ public class PriorityQueueExercise extends Exercise {
         System.out.println("\nElegir una opción:"
                 + "\nr: Redactar un reporte "
                 + "\nv: Visualizar un reporte "
-                + "\nb: Borrar reporte"
+                + "\nb: Borrar todos los reportes "
                 + "\nmm: main menu");
 
         String userInput = scanner.nextLine().toLowerCase();
@@ -62,11 +63,8 @@ public class PriorityQueueExercise extends Exercise {
             case "v":
                 currentPhase = 2;
                 break;
-            case "":
+            case "b":
                 currentPhase = 3;
-                break;
-            case "clear":
-                currentPhase = 4;
                 break;
             case "mm":
                 running = false;
@@ -90,8 +88,9 @@ public class PriorityQueueExercise extends Exercise {
             System.out.println("\nIngresar una descripcion:");
             String descripcion = scanner.nextLine();
             Reporte reporte = new Reporte(titulo,descripcion);
-            queue.enqueue(Reporte);
-            System.out.println("\n" + reporte + " added correctly"); //añade el dato que ingresa el usaurio
+            int prioridad = selectPriority();
+            queue.enqueue(reporte, prioridad);
+            System.out.println("\n" + reporte + "\n" + "Prioridad:" + translatePriority(prioridad)+ " added correctly"); //añade el dato que ingresa el usaurio
 
 
             //preguntar si repito operacion
@@ -119,53 +118,125 @@ public class PriorityQueueExercise extends Exercise {
 
     }
 
-    private void dequeueLogic()
-    {
-
-        //Primero chequeamos que haya una lista y no est
-        //Si no existe o está vacía no se puede remover
-        if(queue == null || queue.isEmpty()){
-
-            System. out. println("\nQueue is null or empty");
+    private void visualizarLogic() {
+        if (queue == null || queue.isEmpty()) {
+            System.out.println("\nNo hay reportes en la cola.");
             currentPhase = 0;
             return;
         }
 
-        String element = queue.dequeue();
-        System.out.printf("\n" + element + " successfully removed");
+        List<Reporte> omitidos = new ArrayList<>();
+        List<Integer> omitidosPrioridad = new ArrayList<>();
 
-        boolean validInput = false;
+        while (!queue.isEmpty()) {
+            int prioridad = queue.getHighestPriority();
+            Reporte reporte = queue.peek();
 
-        while(!validInput)
-        {
-            System.out.println("\nPop another element? y/n");
-            String userInput = scanner.nextLine().toLowerCase();
-            switch (userInput){
-                case "y":
-                    validInput = true;
-                    break;
-                case "n":
-                    validInput = true;
-                    currentPhase = 0;
-                    break;
-                default:
-                    System. out.println("\nInvalid Input, try again");
-                    break;
+            System.out.println("\n========== REPORTE ==========");
+            System.out.println(reporte);
+            System.out.println("Urgencia: " + translatePriority(prioridad));
+            System.out.println("=============================");
+            System.out.println("\nOpciones:"
+                    + "\nr: Marcar como resuelto (eliminar)"
+                    + "\ns: Dejar en la cola (ver el siguiente)"
+                    + "\nq: Volver al menú");
+
+            boolean inputValido = false;
+            while (!inputValido) {
+                String input = scanner.nextLine().toLowerCase();
+                switch (input) {
+                    case "r":
+                        queue.dequeue();
+                        System.out.println("\nReporte marcado como resuelto y eliminado.");
+                        inputValido = true;
+                        break;
+                    case "s":
+                        omitidos.add(queue.dequeue());
+                        omitidosPrioridad.add(prioridad);
+                        System.out.println("\nReporte dejado en la cola.");
+                        inputValido = true;
+                        break;
+                    case "q":
+                        for (int i = 0; i < omitidos.size(); i++) {
+                            queue.enqueue(omitidos.get(i), omitidosPrioridad.get(i));
+                        }
+                        System.out.println("\nVolviendo al menú.");
+                        currentPhase = 0;
+                        return;
+                    default:
+                        System.out.println("\nOpción inválida, intentar de nuevo.");
+                        break;
+                }
             }
         }
-    }
 
-    public void peekLogic(){
-        if(queue == null || queue.isEmpty() ) {
-            System.out.println("\nQueue is null or empty, return to main menu");
-            currentPhase = 0;
-            return;
+        for (int i = 0; i < omitidos.size(); i++) {
+            queue.enqueue(omitidos.get(i), omitidosPrioridad.get(i));
         }
 
-        String element = queue.peek();
-        System.out.printf("\n" + element + " was at the front");
+        System.out.println("\nNo hay más reportes para revisar.");
         currentPhase = 0;
-        return;
+    }
+    private int selectPriority(){
+        @SuppressWarnings("ReassignedVariable") int priority = 0 ;
+        while (priority == 0) {
+
+
+        System.out.println("\nCual es nivel de Urgencia:"
+                + "\nc: nivel Crítico"
+                + "\na: nivel Alto"
+                + "\nm: nivel Medio"
+                + "\nb: nivel Bajo");
+
+        String userInput = scanner.nextLine().toLowerCase();
+
+
+        switch (userInput) {
+
+            case "c":
+                priority = 1;
+                break;
+            case "a":
+                priority = 2;
+                break;
+            case "m":
+                priority = 3;
+                break;
+            case "b":
+                priority = 4;
+                break;
+            default:
+                System.out.println("Invalid choice, try again");
+                break;
+
+        }
+        }
+        return priority;
+    }
+    private String translatePriority(int priority) {
+            @SuppressWarnings("ReassignedVariable") String priorityTransalted = "";
+
+
+            switch (priority) {
+
+                case 1:
+                    priorityTransalted = "Crítico";
+                    break;
+                case 2:
+                    priorityTransalted = "Alto";
+                    break;
+                case 3:
+                    priorityTransalted = "Medio";
+                    break;
+                case 4:
+                    priorityTransalted = "Bajo";
+                    break;
+                default:
+                    break;
+
+            }
+
+        return priorityTransalted;
     }
 
 
@@ -179,13 +250,6 @@ public class PriorityQueueExercise extends Exercise {
         }
         currentPhase = 0;
         return;
-    }
-
-    private void printStatus(){
-        String isEmptyString = "";
-        if(queue.isEmpty()) isEmptyString = "\nQueue is empty.";
-        else isEmptyString = "\nQueue isn't empty.";
-        System.out.println("Queue size: " + queue.size());
     }
 
 }
