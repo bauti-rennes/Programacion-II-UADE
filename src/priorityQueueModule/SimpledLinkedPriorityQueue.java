@@ -6,6 +6,8 @@ public class SimpledLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
     public LinkedPriorityNode<E> last;
     private int size;
 
+
+
     @Override
     public void enqueue(E element, int priority) {
 
@@ -57,36 +59,53 @@ public class SimpledLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
 
     @Override
     public E dequeue() {
+        
+        //Caso 1: La cola está vacía, no puedo desencolar nada
+        if(isEmpty() || first == null)
+            throw new NullPointerException("There's nothing to dequeue.");
 
 
+        
+        LinkedPriorityNode<E> firstNode = first; //Empezamos a comparar desde el final, porque es más probable que el nuevo nodo tenga una prioridad menor que los nodos que ya están en la cola
+        if (firstNode.next != null) {
+            firstNode.next.prev = null; //El nodo que va a ser el nuevo primero, su prev va a ser null porque va a ser el nuevo primero
+            first = firstNode.next; //El nuevo primero va a ser el nodo que estaba después
+        } else {
+            first = null; //Si el nodo que estoy desencolando es el único nodo que hay, entonces el nuevo primero va a ser null
+            last = null; //Si el nodo que estoy desencolando es el único nodo que hay, entonces el nuevo último va a ser null
+        }
+        
 
-        return null;
+        size --;
+
+
+        return (E) firstNode;
     }
 
     @Override
     public E peek() {
-
-
-        return null;
+        return (E) first;
     }
 
     @Override
     public int getHighestPriority() {
-        return 0;
+        return first.priority;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override
     public void clear() {
-
+        first = null;
+        last = null;
+        size = 0;
     }
 }

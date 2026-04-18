@@ -91,7 +91,7 @@ public class SimpleArrayPriorityQueue<E> implements SimplePriorityQueue<E> {
         }
 
         elements[size - 1] = null; //nulleamos el ultimo porque es una referencia a un objeto --> ese objeto me quedaría en memoria cuando no lo quiero
-        priorities[size - 1] = null;
+        priorities[size - 1] = Integer.parseInt(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -118,5 +118,14 @@ public class SimpleArrayPriorityQueue<E> implements SimplePriorityQueue<E> {
 
     private void validateSize(int newSize) {
         if (newSize > elements.length) resize();
+    }
+
+    //Esta es una nueva función que agregamos para el priority queue exercise. Manipulamos el queue como si fuera un array
+    public E removeIndex(int index){
+        E element = elements [index]; //sacamos el primero
+        elements[index] = null;
+        shiftLeft(index);
+        size --;
+        return element;
     }
 }
