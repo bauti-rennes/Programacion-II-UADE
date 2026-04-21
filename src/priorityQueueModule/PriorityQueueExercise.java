@@ -125,8 +125,8 @@ public class PriorityQueueExercise extends Exercise {
             return;
         }
 
-        List<Reporte> omitidos = new ArrayList<>();
-        List<Integer> omitidosPrioridad = new ArrayList<>();
+        List<Reporte> omitidos = new ArrayList<>(); //Array de reportes
+        List<Integer> omitidosPrioridad = new ArrayList<>(); //Array de prioridad
 
         while (!queue.isEmpty()) {
             int prioridad = queue.getHighestPriority();

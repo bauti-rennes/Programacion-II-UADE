@@ -23,6 +23,7 @@ public class SimpledLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
             first = nodeToAdd;
             last = nodeToAdd;
             size ++;
+            return;
         }
 
         //Cuando trabajamos con nodos no podemos usar un for, sino while
@@ -34,7 +35,7 @@ public class SimpledLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
 
         }
 
-        if (current == first){
+        if (current == first){ //Corregir esto para el caso de que el nodetoadd es el unico y el primero
             nodeToAdd.next = current;
             current.prev = nodeToAdd;
             first = nodeToAdd;
