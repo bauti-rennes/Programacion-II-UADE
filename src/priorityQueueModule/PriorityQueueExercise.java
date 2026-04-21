@@ -42,16 +42,19 @@ public class PriorityQueueExercise extends Exercise {
 
     private void menuLogic() {
 
+        // Limpiamos la consola antes de mostrar el menú
+        limpiarConsola();
+
         if (firstTime) {
             firstTime = false;
-            System.out.println("\nWelcome to the Queue Exercise");
+            System.out.println("\nBienvenido al ejercicio de colas de prioridad");
         }
 
         System.out.println("\nElegir una opción:"
                 + "\nr: Redactar un reporte "
                 + "\nv: Visualizar un reporte "
                 + "\nb: Borrar todos los reportes "
-                + "\nmm: main menu");
+                + "\nmm: Menú principal");
 
         String userInput = scanner.nextLine().toLowerCase();
 
@@ -70,7 +73,7 @@ public class PriorityQueueExercise extends Exercise {
                 running = false;
                 break;
             default:
-                System.out.println("Invalid choice, try again");
+                System.out.println("Opción inválida, intentar de nuevo");
                 break;
 
         }
@@ -82,6 +85,9 @@ public class PriorityQueueExercise extends Exercise {
     {
         boolean bandera = true;
 
+        // Limpiamos la consola antes de mostrar la operación
+        limpiarConsola();
+
         while (bandera) {
             System.out.println("\nIngresar un título:");
             String titulo = scanner.nextLine();
@@ -90,26 +96,26 @@ public class PriorityQueueExercise extends Exercise {
             Reporte reporte = new Reporte(titulo,descripcion);
             int prioridad = selectPriority();
             queue.enqueue(reporte, prioridad);
-            System.out.println("\n" + reporte + "\n" + "Prioridad:" + translatePriority(prioridad)+ " added correctly"); //añade el dato que ingresa el usaurio
+            System.out.println("\n" + reporte + "\n" + "Prioridad:" + translatePriority(prioridad)+ " agregado correctamente"); //añade el dato que ingresa el usaurio
 
 
             //preguntar si repito operacion
 
             boolean bandera_2 = true;
             while (bandera_2) {
-                System.out.println("\n¿Repeat operation? (y / n)");
+                System.out.println("\n¿Repetir operación? (y / n)");
                 String rep = scanner.nextLine().toLowerCase();
                 if (rep.equals("n")) {
                     bandera = false;
                     bandera_2 = false;
-                    System.out.println("\nGoing back to menu");
+                    System.out.println("\nVolviendo al menú");
                     currentPhase = 0;  //Esto es para que en la próxima pasada del while me lleve al menu
                 } else {
                     if (rep.equals("y")) {
-                        System.out.println("\nRepeating operation...");
+                        System.out.println("\nRepitiendo operación...");
                         bandera_2 = false;
                     } else {
-                        System.out.println("\nInvalid answer");
+                        System.out.println("\nRespuesta inválida");
                     }
 
                 }
@@ -119,6 +125,10 @@ public class PriorityQueueExercise extends Exercise {
     }
 
     private void visualizarLogic() {
+
+        // Limpiamos la consola antes de mostrar la operación
+        limpiarConsola();
+
         if (queue == null || queue.isEmpty()) {
             System.out.println("\nNo hay reportes en la cola.");
             currentPhase = 0;
@@ -177,10 +187,10 @@ public class PriorityQueueExercise extends Exercise {
         System.out.println("\nNo hay más reportes para revisar.");
         currentPhase = 0;
     }
+
     private int selectPriority(){
         @SuppressWarnings("ReassignedVariable") int priority = 0 ;
         while (priority == 0) {
-
 
         System.out.println("\nCual es nivel de Urgencia:"
                 + "\nc: nivel Crítico"
@@ -189,7 +199,6 @@ public class PriorityQueueExercise extends Exercise {
                 + "\nb: nivel Bajo");
 
         String userInput = scanner.nextLine().toLowerCase();
-
 
         switch (userInput) {
 
@@ -206,16 +215,16 @@ public class PriorityQueueExercise extends Exercise {
                 priority = 4;
                 break;
             default:
-                System.out.println("Invalid choice, try again");
+                System.out.println("Opción inválida, intentar de nuevo");
                 break;
 
         }
         }
         return priority;
     }
+
     private String translatePriority(int priority) {
             @SuppressWarnings("ReassignedVariable") String priorityTransalted = "";
-
 
             switch (priority) {
 
@@ -242,15 +251,14 @@ public class PriorityQueueExercise extends Exercise {
 
     public void clearLogic() {
         if(queue == null || queue.isEmpty() ) {
-            System.out.println("\nQueue is null or empty, return to main menu");
+            System.out.println("\nLa cola está vacía, volviendo al menú principal");
 
         } else {
             queue.clear();
-            System.out.println("\nQueue now is empty, returning to main menu");
+            System.out.println("\nLa cola fue vaciada, volviendo al menú principal");
         }
         currentPhase = 0;
         return;
     }
 
 }
-

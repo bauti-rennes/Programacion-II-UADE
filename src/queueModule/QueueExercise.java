@@ -41,17 +41,20 @@ public class QueueExercise extends Exercise {
 
     private void menuLogic() {
 
+        // Limpiamos la consola antes de mostrar el menú
+        limpiarConsola();
+
         if (firstTime) {
             firstTime = false;
-            System.out.println("\nWelcome to the Queue Exercise");
+            System.out.println("\nBienvenido al ejercicio de colas");
         }
 
-        System.out.println("\nChoose an option:"
-                + "\nenqueue: Add element at the end of the Queue "
-                + "\ndequeue: Remove and show first element "
-                + "\npeek: Show the first element of the Queue "
-                + "\nclear: Clear list "
-                + "\nmm: main menu");
+        System.out.println("\nElegir una opción:"
+                + "\nenqueue: Agregar elemento al final de la cola "
+                + "\ndequeue: Eliminar y mostrar el primer elemento "
+                + "\npeek: Mostrar el primer elemento de la cola "
+                + "\nclear: Vaciar la cola "
+                + "\nmm: Menú principal");
 
         String userInput = scanner.nextLine().toLowerCase();
 
@@ -73,7 +76,7 @@ public class QueueExercise extends Exercise {
                 running = false;
                 break;
             default:
-                System.out.println("Invalid choice, try again");
+                System.out.println("Opción inválida, intentar de nuevo");
                 break;
 
         }
@@ -85,29 +88,32 @@ public class QueueExercise extends Exercise {
     {
         boolean bandera = true;
 
+        // Limpiamos la consola antes de mostrar la operación
+        limpiarConsola();
+
         while (bandera) {
-            System.out.println("\nEnter a string to add:");
+            System.out.println("\nIngresar un string para agregar:");
             String element = scanner.nextLine();
             queue.enqueue(element);
-            System.out.println("\n" + element + " added correctly"); //añade el dato que ingresa el usaurio
+            System.out.println("\n" + element + " agregado correctamente"); //añade el dato que ingresa el usaurio
 
             //preguntar si repito operacion
 
             boolean bandera_2 = true;
             while (bandera_2) {
-                System.out.println("\n¿Repeat operation? (y / n)");
+                System.out.println("\n¿Repetir operación? (y / n)");
                 String rep = scanner.nextLine().toLowerCase();
                 if (rep.equals("n")) {
                     bandera = false;
                     bandera_2 = false;
-                    System.out.println("\nGoing back to menu");
+                    System.out.println("\nVolviendo al menú");
                     currentPhase = 0;  //Esto es para que en la próxima pasada del while me lleve al menu
                 } else {
                     if (rep.equals("y")) {
-                        System.out.println("\nRepeating operation...");
+                        System.out.println("\nRepitiendo operación...");
                         bandera_2 = false;
                     } else {
-                        System.out.println("\nInvalid answer");
+                        System.out.println("\nRespuesta inválida");
                     }
 
                 }
@@ -119,23 +125,26 @@ public class QueueExercise extends Exercise {
     private void dequeueLogic()
     {
 
+        // Limpiamos la consola antes de mostrar la operación
+        limpiarConsola();
+
         //Primero chequeamos que haya una lista y no est
         //Si no existe o está vacía no se puede remover
         if(queue == null || queue.isEmpty()){
 
-            System. out. println("\nQueue is null or empty");
+            System.out.println("\nLa cola está vacía");
             currentPhase = 0;
             return;
         }
 
         String element = queue.dequeue();
-        System.out.printf("\n" + element + " successfully removed");
+        System.out.println("\n" + element + " eliminado correctamente");
 
         boolean validInput = false;
 
         while(!validInput)
         {
-            System.out.println("\nPop another element? y/n");
+            System.out.println("\n¿Hacer dequeue de otro elemento? y/n");
             String userInput = scanner.nextLine().toLowerCase();
             switch (userInput){
                 case "y":
@@ -146,21 +155,25 @@ public class QueueExercise extends Exercise {
                     currentPhase = 0;
                     break;
                 default:
-                    System. out.println("\nInvalid Input, try again");
+                    System.out.println("\nOpción inválida, intentar de nuevo");
                     break;
             }
         }
     }
 
     public void peekLogic(){
+
+        // Limpiamos la consola antes de mostrar la operación
+        limpiarConsola();
+
         if(queue == null || queue.isEmpty() ) {
-            System.out.println("\nQueue is null or empty, return to main menu");
+            System.out.println("\nLa cola está vacía, volviendo al menú principal");
             currentPhase = 0;
             return;
         }
 
         String element = queue.peek();
-        System.out.printf("\n" + element + " was at the front");
+        System.out.println("\n" + element + " está al frente");
         currentPhase = 0;
         return;
     }
@@ -168,11 +181,11 @@ public class QueueExercise extends Exercise {
 
     public void clearLogic() {
         if(queue == null || queue.isEmpty() ) {
-            System.out.println("\nQueue is null or empty, return to main menu");
+            System.out.println("\nLa cola está vacía, volviendo al menú principal");
 
         } else {
             queue.clear();
-            System.out.println("\nQueue now is empty, returning to main menu");
+            System.out.println("\nLa cola fue vaciada, volviendo al menú principal");
         }
         currentPhase = 0;
         return;
@@ -180,9 +193,9 @@ public class QueueExercise extends Exercise {
 
     private void printStatus(){
         String isEmptyString = "";
-        if(queue.isEmpty()) isEmptyString = "\nQueue is empty.";
-        else isEmptyString = "\nQueue isn't empty.";
-        System.out.println("Queue size: " + queue.size());
+        if(queue.isEmpty()) isEmptyString = "\nLa cola está vacía.";
+        else isEmptyString = "\nLa cola no está vacía.";
+        System.out.println("Tamaño de la cola: " + queue.size());
     }
 
 }

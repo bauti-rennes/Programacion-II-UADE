@@ -5,22 +5,22 @@ import java.util.Scanner;
 import application.Exercise;
 
 public class ListExercise extends Exercise {
-	
+
 	private int currentPhase = 0;
 	private boolean firstTime = true;
 	private SimpleList<String> list;
-	
-	
+
+
 	public ListExercise(Scanner scnr) {
-			
+
 		super(scnr);
 		list = new SimpleLinkedList<>();
-		
+
 	}
-	
+
 	@Override
 	protected void exerciseLogic() {
-		
+
 		switch(currentPhase) {
 			case 0:
 				menuLogic();
@@ -39,33 +39,35 @@ public class ListExercise extends Exercise {
 				break;
 		}
 	}
-	
+
 
 	private void menuLogic() {
-		
-		
-		if (firstTime) 
+
+		// Limpiamos la consola antes de mostrar el menú
+		limpiarConsola();
+
+		if (firstTime)
 		{
 			firstTime = false;
-			System.out.println("\nWelcome to the List Exercise");
+			System.out.println("\nBienvenido al ejercicio de listas");
 		}
-		else 
-		{	
+		else
+		{
 			printList();
 
 		}
 
-		System.out.println("Choose an option:"
-				+ "\nadd: Add element "
-				+ "\nremoveIndex: Remove element by Index "
-				+ "\nremoveRef: Remove element by Reference "
-				+ "\nclear: Clear list "
-				+ "\nmm: main menu");
-		
+		System.out.println("Elegir una opción:"
+				+ "\nadd: Agregar elemento "
+				+ "\nremoveIndex: Eliminar elemento por índice "
+				+ "\nremoveRef: Eliminar elemento por referencia "
+				+ "\nclear: Vaciar la lista "
+				+ "\nmm: Menú principal");
+
 		String userInput = scanner.nextLine().toLowerCase();
-		
+
 		switch(userInput) {
-		
+
 		case "add":
 			currentPhase = 1;
 			break;
@@ -82,38 +84,41 @@ public class ListExercise extends Exercise {
 			running = false;
 			break;
 		default:
-			System.out.println("Invalid choice, try again");
+			System.out.println("Opción inválida, intentar de nuevo");
 			break;
 
 		}
-		
+
 	}
-	
+
 	private void printList()
 	{
 		String fullList = "";
-		
+
 		for(int i = 0; i < list.size(); i++) //(contador, condición que se tiene que cumplir, paso del contador)
 		{
 			fullList += list.get(i);
-			
-			if (i < list.size()-1) 
+
+			if (i < list.size()-1)
 			{
 				fullList += ", ";
 			}
-			
+
 		}
-		System.out.println("\nCurrent List: " + fullList);	
+		System.out.println("\nLista actual: " + fullList);
 	}
-	
-	
-		
+
+
+
 	private void addLogic() //con el Scanner ponemos un dato y depsués lo agregamos a la lista
 	{
 		boolean bandera = true;
 
+		// Limpiamos la consola antes de mostrar la operación
+		limpiarConsola();
+
 		while (bandera) {
-			System.out.println("\nEnter a string to add:");
+			System.out.println("\nIngresar un string para agregar:");
 			list.add(scanner.nextLine()); //añade el dato que ingresa el usaurio
 
 			printList();
@@ -121,19 +126,19 @@ public class ListExercise extends Exercise {
 
 			boolean bandera_2 = true;
 			while (bandera_2) {
-				System.out.println("\n¿Repeat operation? (y / n)");
+				System.out.println("\n¿Repetir operación? (y / n)");
 				String rep = scanner.nextLine().toLowerCase();
 				if (rep.equals("n")) {
 					bandera = false;
 					bandera_2 = false;
-					System.out.println("\nGoing back to menu");
+					System.out.println("\nVolviendo al menú");
 					currentPhase = 0;  //Esto es para que en la próxima pasada del while me lleve al menu
 				} else {
 					if (rep.equals("y")) {
-						System.out.println("\nRepeating operation...");
+						System.out.println("\nRepitiendo operación...");
 						bandera_2 = false;
 					} else {
-						System.out.println("\nInvalid answer");
+						System.out.println("\nRespuesta inválida");
 					}
 
 				}
@@ -141,52 +146,55 @@ public class ListExercise extends Exercise {
 		}
 
 	}
-	
+
 	private void removeByIndexLogic() {
-		
+
 		boolean bandera = true;
+
+		// Limpiamos la consola antes de mostrar la operación
+		limpiarConsola();
 
 		while (bandera) {
 
-			System.out.println("\nEnter an index to remove:");
+			System.out.println("\nIngresar un índice para eliminar:");
 			int index = Integer.parseInt(scanner.nextLine());
 			if (index < list.size()) {
 				list.remove(index); //quita el dato según index
 
-				System.out.println("\nElement removed");
+				System.out.println("\nElemento eliminado");
 				printList();
 			}
 			else {
-				System.out.println("\nIndex does not exist");
+				System.out.println("\nEl índice no existe");
 			}
 
 		//preguntar si repito operacion
 			boolean bandera_2 = true;
 
 			if (list.isEmpty()) {
-				System.out.println("\nList is empty");
+				System.out.println("\nLa lista está vacía");
 				bandera_2 = false;
 				bandera = false;
 				currentPhase = 0;
 			}
 
 			while (bandera_2){
-				System.out.println("\n¿Repeat operation? (y / n)");
+				System.out.println("\n¿Repetir operación? (y / n)");
 				String rep = scanner.nextLine().toLowerCase();
 				if (rep.equals("n"))
 				{
 					bandera = false;
 					bandera_2 = false;
-					System.out.println("\nGoing back to menu");
+					System.out.println("\nVolviendo al menú");
 					currentPhase = 0;
 				}
 				else  {
 					if (rep.equals("y")){
-						System.out.println("\nRepeating operation...");
+						System.out.println("\nRepitiendo operación...");
 						bandera_2 = false;
 					}
 					else{
-						System.out.println("\nInvalid answer");
+						System.out.println("\nRespuesta inválida");
 					}
 
 				}
@@ -194,22 +202,25 @@ public class ListExercise extends Exercise {
 
 		}
 	}
-	
+
 	private void removeByReferenceLogic() {
 
 		boolean bandera = true;
 
+		// Limpiamos la consola antes de mostrar la operación
+		limpiarConsola();
+
 		while (bandera) {
-			System.out.println("\nEnter a reference to remove:");
+			System.out.println("\nIngresar una referencia para eliminar:");
 			String ref = scanner.nextLine();
 
 			//Acá defino la variable removed como un booleano y lo agrego a la lista
 			boolean removed = list.remove(ref);
 
 			if (removed) {
-				System.out.println("\nElement removed");
+				System.out.println("\nElemento eliminado");
 			} else {
-				System.out.println("\nElement not found");
+				System.out.println("\nElemento no encontrado");
 			}
 
 			printList();
@@ -217,37 +228,36 @@ public class ListExercise extends Exercise {
 
 			boolean bandera_2 = true;
 			while (bandera_2){
-				System.out.println("\n¿Repeat operation? (y / n)");
+				System.out.println("\n¿Repetir operación? (y / n)");
 				String rep = scanner.nextLine().toLowerCase();
 				if (rep.equals("n"))
 				{
 					bandera = false;
 					bandera_2 = false;
-					System.out.println("\nGoing back to menu");
+					System.out.println("\nVolviendo al menú");
 					currentPhase = 0;
 				}
 				else  {
 					if (rep.equals("y")){
-						System.out.println("\nRepeating operation...");
+						System.out.println("\nRepitiendo operación...");
 						bandera_2 = false;
 					}
 					else{
-						System.out.println("\nInvalid answer");
+						System.out.println("\nRespuesta inválida");
 					}
 
 				}
 		}	}
 
 	}
-	
+
 	private void clearLogic()
 	{
 
 		list.clear();
-		System.out.println("\nList cleared");
+		System.out.println("\nLista vaciada");
 		currentPhase = 0;
 
 		//Acá no pregunto si volver a repetir la opreación porque no tiene sentido
 	}
 }
-
