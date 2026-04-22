@@ -3,7 +3,7 @@ package application;
 // Importamos la clase Scanner que es propia de java
 import java.util.Scanner;
 
-import list.ListExercise;
+import listModule.ListExercise;
 import priorityQueueModule.PriorityQueueExercise;
 import queueModule.QueueExercise;
 import setModule.SetExercise;

@@ -1,6 +1,6 @@
 package stackModule;
 
-import list.LinkedNode;
+import listModule.LinkedNode;
 
 import java.util.NoSuchElementException;
 

@@ -1,4 +1,4 @@
-package list;
+package listModule;
 
 // E es un genérico en el que puede ir cualquier cosa. Siempre la E tiene que ser de lo mismo igual
 // Si pongo Integer E, todas las E se convierten en Integer

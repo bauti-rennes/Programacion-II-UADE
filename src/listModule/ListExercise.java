@@ -1,4 +1,4 @@
-package list;
+package listModule;
 
 import java.util.Scanner;
 

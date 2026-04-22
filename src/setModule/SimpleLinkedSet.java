@@ -1,6 +1,6 @@
 package setModule;
 
-import list.LinkedNode;
+import listModule.LinkedNode;
 
 public class SimpleLinkedSet<E> implements SimpleSet<E> {
 

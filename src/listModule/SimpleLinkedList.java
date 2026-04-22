@@ -1,4 +1,4 @@
-package list;
+package listModule;
 
 public class SimpleLinkedList<E> implements SimpleList<E> {
 

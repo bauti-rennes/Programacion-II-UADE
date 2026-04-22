@@ -1,7 +1,6 @@
 package stackModule;
 
 import application.Exercise;
-import list.SimpleList;
 
 import java.util.Scanner;
 
