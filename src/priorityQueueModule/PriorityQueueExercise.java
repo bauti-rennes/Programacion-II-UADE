@@ -42,9 +42,6 @@ public class PriorityQueueExercise extends Exercise {
 
     private void menuLogic() {
 
-        // Limpiamos la consola antes de mostrar el menú
-        limpiarConsola();
-
         if (firstTime) {
             firstTime = false;
             System.out.println("\nBienvenido al ejercicio de colas de prioridad");
