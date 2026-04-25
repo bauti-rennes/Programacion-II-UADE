@@ -3,6 +3,7 @@ package application;
 // Importamos la clase Scanner que es propia de java
 import java.util.Scanner;
 
+import dictionaryModule.LoginSystem;
 import listModule.ListExercise;
 import priorityQueueModule.PriorityQueueExercise;
 import queueModule.QueueExercise;
@@ -67,7 +68,9 @@ public class MainProgram {
 				"\n3 - Ejercicio de pilas" +
 				"\n4 - Ejercicio de colas" +
 				"\n5 - Ejercicio de conjuntos" +
-				"\n6 - Ejercicio de colas de prioridad");
+				"\n6 - Ejercicio de colas de prioridad" +
+				"\n7 - Ejercicio de diccionarios")
+		;
 
 		//Esto es para almacenar en un string lo que puso el usuario
 		String userInput = scanner.nextLine();
@@ -95,6 +98,9 @@ public class MainProgram {
 			break;
 		case "6":
 			exercise = new PriorityQueueExercise(scanner);
+			break;
+		case "7":
+			exercise = new LoginSystem(scanner);
 			break;
 		default:
 			//Esto sería como el "else" de python

@@ -31,9 +31,6 @@ public class LoginSystem extends Exercise {
             case 2:
                 loginLogic();
                 break;
-            case 3:
-                logoutLogic();
-                break;
         }
     }
 
@@ -48,7 +45,6 @@ public class LoginSystem extends Exercise {
         System.out.println("\nElegir una opción:"
                 + "\nr: Registrar un nuevo usuario "
                 + "\nl: Iniciar sesión "
-                + "\no: Cerrar sesión "
                 + "\nmm: Volver al menú principal");
 
         String userInput = scanner.nextLine().toLowerCase();
@@ -58,9 +54,6 @@ public class LoginSystem extends Exercise {
                 break;
             case "l":
                 currentPhase = 2;
-                break;
-            case "o":
-                currentPhase = 3;
                 break;
             case "mm":
                 running = false;
@@ -72,17 +65,24 @@ public class LoginSystem extends Exercise {
 
     private void registerLogic(){
 
+
+
         // Limpiamos la consola antes de mostrar la operación
         limpiarConsola();
 
         //Ingreso de nombre + Validacion del nombre de usuario
         String usuario = selectUsername();
 
+
         //Ingreso de contraseña + Validacion de la contraseña
         String password = selectPassword();
 
         //Agrego el nuevo usuario al diccionario
         users.put(usuario,password);
+
+        //Vuelvo al menu
+        System.out.println("Usuario registrado con éito. Volviendo al menú");
+        currentPhase = 0;
 
     }
 
@@ -99,7 +99,7 @@ public class LoginSystem extends Exercise {
         }
 
         //Pedirle al usuario que ponga una contraseña
-        boolean successfullLogin = loginPassword();
+        boolean successfullLogin = loginPassword(username);
 
         if (successfullLogin){
             System.out.println("Ingreso correcto. Bienvenido " + username);
@@ -108,7 +108,9 @@ public class LoginSystem extends Exercise {
             System.out.println("Demasiados intentos fallidos. ");
         }
 
-
+        //Vuelvo al menu
+        System.out.println("Usuario registrado con éxito. Volviendo al menú");
+        currentPhase = 0;
 
     }
 
@@ -164,6 +166,7 @@ public class LoginSystem extends Exercise {
 
         @SuppressWarnings("ReassignedVariable") String username = "" ;
 
+        //Esto es para que entre al while
         boolean backToMenu = false;
 
         while (username == "" && backToMenu == false) {
@@ -188,6 +191,9 @@ public class LoginSystem extends Exercise {
 
             if (username == "") {
                 backToMenu = returnMenu();
+                if (backToMenu == true){
+                    currentPhase = 0;
+                }
             }
 
         }
@@ -197,23 +203,29 @@ public class LoginSystem extends Exercise {
 
     private boolean returnMenu() {
 
+        boolean returnToMenu = false;
+
         boolean bandera = true;
 
         while (bandera){
             System.out.println("\n¿Volver al menu? (s/n)");
 
-            String userInput = scanner.nextLine();
+            String userInput = scanner.nextLine().toLowerCase();
 
             switch (userInput) {
                 case "s":
-                    return true;
+                    returnToMenu = true;
+                    bandera = false;
+                    break;
                 case "n":
-                    return false;
+                    returnToMenu = false;
+                    bandera = false;
+                    break;
                 default:
                     System.out.println("\nOpción inválida. Intente de nuevo");
-                    break;
             }
         }
+        return returnToMenu;
 
     }
 
@@ -230,7 +242,7 @@ public class LoginSystem extends Exercise {
 
             password = userInput;
 
-            if (password == correct_password){
+            if (password.equals(correct_password)){
                 return true;
             }
             tries++;
