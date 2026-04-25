@@ -188,6 +188,7 @@ public class StackExercise extends Exercise {
             stack.clear();
             System.out.println("\nLa pila fue vaciada, volviendo al menú principal");
         }
+        currentPhase = 0;
     }
 
     private void printStatus(){
