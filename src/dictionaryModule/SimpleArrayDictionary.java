@@ -24,7 +24,7 @@ public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K,V>{
         {
             if(key.equals(keys[i]))
             {
-                V oldValue = values[i]
+                V oldValue = values[i];
                 values[i] = value;
                 return oldValue; //Si existía un valor en esa key, reemplazo por el valor nuevo y devuelvo el valor viejo
             }
@@ -47,8 +47,8 @@ public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K,V>{
             if(key.equals(keys[i]))
             {
                if(i < size-1){ //Si no estoy en el último, agarro el último y lo reemplazo por esa posicion (acordarse de que en los diccionarios no importa el orden, entonces no me importa si cambio el orden de los elementos)
-                   keys[i] = keys[size - 1]
-                   values[i] = values[size - 1]
+                   keys[i] = keys[size - 1];
+                   values[i] = values[size - 1];
                }
                //Elimino los ultimos valores porque sino me quedan duplicados
                keys[size-1] = null;

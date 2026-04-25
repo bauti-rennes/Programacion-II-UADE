@@ -49,7 +49,7 @@ public class LoginSystem extends Exercise {
                 + "\nr: Registrar un nuevo usuario "
                 + "\nl: Iniciar sesión "
                 + "\no: Cerrar sesión "
-                + "\nb: Volver al menú principal");
+                + "\nmm: Volver al menú principal");
 
         String userInput = scanner.nextLine().toLowerCase();
         switch (userInput) {
@@ -91,6 +91,13 @@ public class LoginSystem extends Exercise {
         //Pedirle al usuario que ponga un nombre de usuario
         String username = loginUsername();
 
+        //Si devuelve "" es porque
+        if (username == ""){
+            System.out.println("\nVolviendo al Menú.");
+            currentPhase = 0;
+            return;
+        }
+
         //Pedirle al usuario que ponga una contraseña
         boolean successfullLogin = loginPassword();
 
@@ -126,7 +133,7 @@ public class LoginSystem extends Exercise {
             username = userInput;
 
             if (username == ""){
-                System.out.println("\nNombre de usuario inválido")
+                System.out.println("\nNombre de usuario inválido");
             }
             else if (!validateUsername(username)) {
                 username = "";
@@ -146,7 +153,7 @@ public class LoginSystem extends Exercise {
             password = userInput;
 
             if (password == ""){
-                System.out.println("\nConstraseña inválida (no puede ser vacía)")
+                System.out.println("\nConstraseña inválida (no puede ser vacía)");
             }
 
         }
@@ -154,8 +161,12 @@ public class LoginSystem extends Exercise {
     }
 
     private String loginUsername(){ //Función que valida nombre de usuario, en un futuro podemos validar si contiene numeros, caracteres especiales, etc (agregar más validacioens dentro de la misma funcion)
+
         @SuppressWarnings("ReassignedVariable") String username = "" ;
-        while (username == "") {
+
+        boolean backToMenu = false;
+
+        while (username == "" && backToMenu == false) {
 
             System.out.println("\n¿Cuál es el nombre de usuario?");
 
@@ -164,7 +175,7 @@ public class LoginSystem extends Exercise {
             username = userInput;
 
             if (username == ""){
-                System.out.println("\nNombre de usuario inválido")
+                System.out.println("\nNombre de usuario inválido");
             }
             else if (users.containsKey(username) == false) {
                 System.out.println("\nEl nombre de usuario no existe. Intente de nuevo.");
@@ -175,8 +186,35 @@ public class LoginSystem extends Exercise {
                 // TODO: Fijarse la manera de contemplar la forma de volver al menu
             }
 
+            if (username == "") {
+                backToMenu = returnMenu();
+            }
+
         }
+
         return username;
+    }
+
+    private boolean returnMenu() {
+
+        boolean bandera = true;
+
+        while (bandera){
+            System.out.println("\n¿Volver al menu? (s/n)");
+
+            String userInput = scanner.nextLine();
+
+            switch (userInput) {
+                case "s":
+                    return true;
+                case "n":
+                    return false;
+                default:
+                    System.out.println("\nOpción inválida. Intente de nuevo");
+                    break;
+            }
+        }
+
     }
 
     private boolean loginPassword(String username){ //

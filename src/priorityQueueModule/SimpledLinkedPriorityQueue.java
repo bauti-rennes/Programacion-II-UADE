@@ -23,7 +23,7 @@ public class SimpledLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
             first = nodeToAdd;
             last = nodeToAdd;
             size ++;
-            return
+            return;
         }
 
         //Cuando trabajamos con nodos no podemos usar un for, sino while
