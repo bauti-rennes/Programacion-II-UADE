@@ -105,8 +105,7 @@ public class LoginSystem extends Exercise {
             System.out.println("Demasiados intentos fallidos. ");
         }
 
-        //Vuelvo al menu
-        System.out.println("Usuario registrado con éxito. Volviendo al menú");
+
         currentPhase = 0;
 
     }
