@@ -7,7 +7,6 @@ public class SimpledLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
     private int size;
 
 
-
     @Override
     public void enqueue(E element, int priority) {
 
