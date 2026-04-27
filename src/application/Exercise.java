@@ -36,9 +36,5 @@ public abstract class Exercise {
 	//no sé qué va a hacer exerciseLogic, lo dejo como comodín
 	protected abstract void exerciseLogic();
 
-	// Imprime líneas en blanco para simular que se limpió la consola
-	protected void limpiarConsola() {
-		for (int i = 0; i < 50; i++) System.out.println(); // TODO: Validar limpiar consola en los ejercicios.
-	}
 
 }

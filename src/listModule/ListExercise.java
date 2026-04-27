@@ -43,8 +43,6 @@ public class ListExercise extends Exercise {
 
 	private void menuLogic() {
 
-		// Limpiamos la consola antes de mostrar el menú
-		limpiarConsola();
 
 		if (firstTime)
 		{
@@ -114,9 +112,7 @@ public class ListExercise extends Exercise {
 	{
 		boolean bandera = true;
 
-		// Limpiamos la consola antes de mostrar la operación
-		limpiarConsola();
-
+		
 		while (bandera) {
 			System.out.println("\nIngresar un string para agregar:");
 			list.add(scanner.nextLine()); //añade el dato que ingresa el usaurio
@@ -151,9 +147,7 @@ public class ListExercise extends Exercise {
 
 		boolean bandera = true;
 
-		// Limpiamos la consola antes de mostrar la operación
-		limpiarConsola();
-
+		
 		while (bandera) {
 
 			System.out.println("\nIngresar un índice para eliminar:");
@@ -207,8 +201,7 @@ public class ListExercise extends Exercise {
 
 		boolean bandera = true;
 
-		// Limpiamos la consola antes de mostrar la operación
-		limpiarConsola();
+		
 
 		while (bandera) {
 			System.out.println("\nIngresar una referencia para eliminar:");

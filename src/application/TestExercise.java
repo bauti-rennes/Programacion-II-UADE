@@ -17,8 +17,6 @@ public class TestExercise extends Exercise {
 	@Override
 	protected void exerciseLogic() {
 
-		// Limpiamos la consola antes de mostrar el menú
-		limpiarConsola();
 
 		System.out.println("Bienvenido al ejercicio de prueba"
 				+ "\nmm: Menú principal");

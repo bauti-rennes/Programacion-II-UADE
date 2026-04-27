@@ -42,8 +42,7 @@ public class StackExercise extends Exercise {
 
     private void menuLogic() {
 
-        // Limpiamos la consola antes de mostrar el menú
-        limpiarConsola();
+        
 
         if (firstTime) {
             firstTime = false;
@@ -88,9 +87,7 @@ public class StackExercise extends Exercise {
     {
         boolean bandera = true;
 
-        // Limpiamos la consola antes de mostrar la operación
-        limpiarConsola();
-
+         
         while (bandera) {
             System.out.println("\nIngresar un string para agregar:");
             String element = scanner.nextLine();
@@ -126,9 +123,7 @@ public class StackExercise extends Exercise {
     private void popLogic()
     {
 
-        // Limpiamos la consola antes de mostrar la operación
-        limpiarConsola();
-
+         
         //Primero chequeamos que haya una lista y no est
         //Si no existe o está vacía no se puede remover
         if(stack == null || stack.isEmpty()){
@@ -164,9 +159,7 @@ public class StackExercise extends Exercise {
 
     public void peekLogic(){
 
-        // Limpiamos la consola antes de mostrar la operación
-        limpiarConsola();
-
+         
         if(stack == null || stack.isEmpty() ) {
             System.out.println("\nLa pila está vacía, volviendo al menú principal");
             currentPhase = 0;

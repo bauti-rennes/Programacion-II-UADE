@@ -32,8 +32,7 @@ public class SetExercise extends Exercise {
 
     private void menuLogic() {
 
-        // Limpiamos la consola antes de mostrar el menú
-        limpiarConsola();
+        
 
         if (firstTime) {
             firstTime = false;
@@ -99,8 +98,7 @@ public class SetExercise extends Exercise {
 
     private void selectSetLogic() {
 
-        // Limpiamos la consola antes de mostrar el submenú del conjunto seleccionado
-        limpiarConsola();
+        
 
         System.out.println("\nTrabajando con el Conjunto " + selectedSetName
                 + "\n  Elementos: " + Arrays.toString(selectedSet.toArray())
@@ -130,9 +128,7 @@ public class SetExercise extends Exercise {
     private void addLogic() {
         boolean repeat = true;
 
-        // Limpiamos la consola antes de mostrar la operación
-        limpiarConsola();
-
+         
         while (repeat) {
             System.out.println("\nIngresá el elemento a agregar al Conjunto " + selectedSetName + ":");
             String element = scanner.nextLine();
@@ -148,9 +144,7 @@ public class SetExercise extends Exercise {
     private void removeLogic() {
         boolean repeat = true;
 
-        // Limpiamos la consola antes de mostrar la operación
-        limpiarConsola();
-
+         
         while (repeat) {
             System.out.println("\nIngresá el elemento a eliminar del Conjunto " + selectedSetName + ":");
             String element = scanner.nextLine();

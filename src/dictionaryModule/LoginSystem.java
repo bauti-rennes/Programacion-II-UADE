@@ -35,7 +35,7 @@ public class LoginSystem extends Exercise {
     }
 
     private void menuLogic() {
-        limpiarConsola();
+        
 
         if (firstTime) {
             firstTime = false;
@@ -66,9 +66,6 @@ public class LoginSystem extends Exercise {
     private void registerLogic(){
 
 
-
-        // Limpiamos la consola antes de mostrar la operación
-        limpiarConsola();
 
         //Ingreso de nombre + Validacion del nombre de usuario
         String usuario = selectUsername();

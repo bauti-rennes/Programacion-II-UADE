@@ -82,8 +82,7 @@ public class PriorityQueueExercise extends Exercise {
     {
         boolean bandera = true;
 
-        // Limpiamos la consola antes de mostrar la operación
-        limpiarConsola();
+        
 
         while (bandera) {
             System.out.println("\nIngresar un título:");
@@ -123,9 +122,7 @@ public class PriorityQueueExercise extends Exercise {
 
     private void visualizarLogic() {
 
-        // Limpiamos la consola antes de mostrar la operación
-        limpiarConsola();
-
+         
         if (queue == null || queue.isEmpty()) {
             System.out.println("\nNo hay reportes en la cola.");
             currentPhase = 0;
