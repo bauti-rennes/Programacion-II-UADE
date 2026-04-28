@@ -13,9 +13,9 @@ public class SimpleLinkedSet<E> implements SimpleSet<E> {
 
         LinkedNode<E> newNode = new LinkedNode<>(element);
 
-        if (isEmpty()) {
+        if (isEmpty()) { //Si está vacío lo agrego al principio
             first = newNode;
-        } else {
+        } else { //Sino, lo agrego al final
             LinkedNode<E> current = first;
             while (current.next != null) {
                 current = current.next;
@@ -33,10 +33,15 @@ public class SimpleLinkedSet<E> implements SimpleSet<E> {
         LinkedNode<E> current = first;
 
         while (current != null) {
-            if (current.value.equals(element)) {
-                if (current.prev != null) current.prev.next = current.next;
-                else first = current.next; // era el primero
 
+            //Si encontré el elemento:
+            if (current.value.equals(element)) {
+
+                //Contemplo si el elemento a remover es el primero
+                if (current.prev != null) current.prev.next = current.next;
+                else first = current.next;
+
+                //Contemplo si el elemento era el último
                 if (current.next != null) current.next.prev = current.prev;
 
                 size--;
@@ -50,7 +55,10 @@ public class SimpleLinkedSet<E> implements SimpleSet<E> {
 
     @Override
     public boolean contains(E element) {
+
         LinkedNode<E> current = first;
+
+        //Recorro todos los elementos del set y devuelvo true si lo encontré
         while (current != null) {
             if (current.value.equals(element)) return true;
             current = current.next;
@@ -76,9 +84,11 @@ public class SimpleLinkedSet<E> implements SimpleSet<E> {
 
     @Override
     public E[] toArray() {
+
         E[] result = (E[]) new Object[size];
         LinkedNode<E> current = first;
         int i = 0;
+
         while (current != null) {
             result[i] = current.value;
             i++;
@@ -87,10 +97,13 @@ public class SimpleLinkedSet<E> implements SimpleSet<E> {
         return result;
     }
 
+    //Todas estas funciones son iguales a la implementación estática solo que con el recorrido de nodos
     @Override
     public SimpleSet<E> unionWith(SimpleSet<E> other) {
+
         SimpleLinkedSet<E> result = new SimpleLinkedSet<>();
         LinkedNode<E> current = first;
+
         while (current != null) {
             result.add(current.value);
             current = current.next;
@@ -104,8 +117,10 @@ public class SimpleLinkedSet<E> implements SimpleSet<E> {
 
     @Override
     public SimpleSet<E> intersectWith(SimpleSet<E> other) {
+
         SimpleLinkedSet<E> result = new SimpleLinkedSet<>();
         LinkedNode<E> current = first;
+
         while (current != null) {
             if (other.contains(current.value)) result.add(current.value);
             current = current.next;
@@ -115,8 +130,10 @@ public class SimpleLinkedSet<E> implements SimpleSet<E> {
 
     @Override
     public SimpleSet<E> differenceWith(SimpleSet<E> other) {
+
         SimpleLinkedSet<E> result = new SimpleLinkedSet<>();
         LinkedNode<E> current = first;
+
         while (current != null) {
             if (!other.contains(current.value)) result.add(current.value);
             current = current.next;

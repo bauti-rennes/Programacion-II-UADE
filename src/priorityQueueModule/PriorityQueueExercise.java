@@ -99,7 +99,7 @@ public class PriorityQueueExercise extends Exercise {
 
             boolean bandera_2 = true;
             while (bandera_2) {
-                System.out.println("\n¿Repetir operación? (y / n)");
+                System.out.println("\n¿Repetir operación? (s / n)");
                 String rep = scanner.nextLine().toLowerCase();
                 if (rep.equals("n")) {
                     bandera = false;
@@ -107,7 +107,7 @@ public class PriorityQueueExercise extends Exercise {
                     System.out.println("\nVolviendo al menú");
                     currentPhase = 0;  //Esto es para que en la próxima pasada del while me lleve al menu
                 } else {
-                    if (rep.equals("y")) {
+                    if (rep.equals("s")) {
                         System.out.println("\nRepitiendo operación...");
                         bandera_2 = false;
                     } else {

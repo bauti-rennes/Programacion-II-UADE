@@ -18,7 +18,7 @@ public class QueueExercise extends Exercise {
     @Override
     protected void exerciseLogic() {
 
-        //El switch lo copypasteamos de ListExercise porqued va a ser igual
+        //El switch lo copypasteamos de ListExercise porque va a ser igual
         switch (currentPhase) {
             case 0:
                 menuLogic();
@@ -40,8 +40,6 @@ public class QueueExercise extends Exercise {
 
 
     private void menuLogic() {
-
-        
 
         if (firstTime) {
             firstTime = false;
@@ -98,7 +96,7 @@ public class QueueExercise extends Exercise {
 
             boolean bandera_2 = true;
             while (bandera_2) {
-                System.out.println("\n¿Repetir operación? (y / n)");
+                System.out.println("\n¿Repetir operación? (s / n)");
                 String rep = scanner.nextLine().toLowerCase();
                 if (rep.equals("n")) {
                     bandera = false;
@@ -106,7 +104,7 @@ public class QueueExercise extends Exercise {
                     System.out.println("\nVolviendo al menú");
                     currentPhase = 0;  //Esto es para que en la próxima pasada del while me lleve al menu
                 } else {
-                    if (rep.equals("y")) {
+                    if (rep.equals("s")) {
                         System.out.println("\nRepitiendo operación...");
                         bandera_2 = false;
                     } else {
@@ -139,10 +137,10 @@ public class QueueExercise extends Exercise {
 
         while(!validInput)
         {
-            System.out.println("\n¿Hacer dequeue de otro elemento? y/n");
+            System.out.println("\n¿Hacer dequeue de otro elemento? s/n");
             String userInput = scanner.nextLine().toLowerCase();
             switch (userInput){
-                case "y":
+                case "s":
                     validInput = true;
                     break;
                 case "n":

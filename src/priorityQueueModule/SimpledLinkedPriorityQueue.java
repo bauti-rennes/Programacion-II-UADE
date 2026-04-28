@@ -10,14 +10,14 @@ public class SimpledLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
     @Override
     public void enqueue(E element, int priority) {
 
-        //Caso 1: El elemento es null
+        //Si el elemento es null tiro error
         if(element == null)
             throw new NullPointerException("Element cannot be null.");
 
-        //Tengo que crear el nodo
+        //Creo el nodo
         LinkedPriorityNode<E> nodeToAdd = new LinkedPriorityNode<E>(element, priority); //Este elemento y prioridad son los que se reciben por parametro
 
-        //Caso 2: La cola está vacía, el primero que inserto es el primero y el ultimo
+        //Si la cola está vacía, el primero que inserto es el primero y el ultimo
         if(isEmpty()) {
             first = nodeToAdd;
             last = nodeToAdd;
@@ -46,7 +46,7 @@ public class SimpledLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
                 last = nodeToAdd;
             }
         else {
-            //4 conexiones
+            //son 4 conexiones
             nodeToAdd.prev = current; //primero modifico el que voy a agregar
             nodeToAdd.next = current.next; //sigo modificando el que voy a agregar
             current.next.prev = nodeToAdd; //siempre modifico el current.prev.next (si vengo por la izquierda) o current.next.prev (si vengo por la derecha)
@@ -60,21 +60,19 @@ public class SimpledLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
     @Override
     public E dequeue() {
         
-        //Caso 1: La cola está vacía, no puedo desencolar nada
+        //La cola está vacía, no puedo sacar nada
         if(isEmpty() || first == null)
-            throw new NullPointerException("There's nothing to dequeue.");
-
-
+            throw new NullPointerException("No hay nada para remover.");
         
-        LinkedPriorityNode<E> firstNode = first; //Empezamos a comparar desde el final, porque es más probable que el nuevo nodo tenga una prioridad menor que los nodos que ya están en la cola
+        LinkedPriorityNode<E> firstNode = first;
+
         if (firstNode.next != null) {
-            firstNode.next.prev = null; //El nodo que va a ser el nuevo primero, su prev va a ser null porque va a ser el nuevo primero
+            firstNode.next.prev = null; //Nulleo la conexión del segundo (firstNode.next) hacia el primero
             first = firstNode.next; //El nuevo primero va a ser el nodo que estaba después
-        } else {
-            first = null; //Si el nodo que estoy desencolando es el único nodo que hay, entonces el nuevo primero va a ser null
-            last = null; //Si el nodo que estoy desencolando es el único nodo que hay, entonces el nuevo último va a ser null
+        } else { //Si es el único nodo, nulleo todo
+            first = null;
+            last = null;
         }
-        
 
         size --;
 

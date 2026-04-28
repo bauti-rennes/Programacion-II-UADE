@@ -25,7 +25,7 @@ public class SimpleLinkedStack<E> implements SimpleStack<E> {
 
     @Override
     public E pop() {
-        if(isEmpty()) throw new NoSuchElementException("Stack is empty");
+        if(isEmpty()) throw new NoSuchElementException("El Stack está vacío.");
         E element = last.value;
         if (size == 1) last = null;
         else last = last.prev;
@@ -36,7 +36,7 @@ public class SimpleLinkedStack<E> implements SimpleStack<E> {
     @Override
     public E peek() {
 
-        if(isEmpty()) throw new NoSuchElementException("Stack is empty");
+        if(isEmpty()) throw new NoSuchElementException("El Stack está vacío.");
 
         return last.value;
     }

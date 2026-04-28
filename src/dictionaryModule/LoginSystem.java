@@ -78,7 +78,7 @@ public class LoginSystem extends Exercise {
         users.put(usuario,password);
 
         //Vuelvo al menu
-        System.out.println("Usuario registrado con éito. Volviendo al menú");
+        System.out.println("Usuario registrado con éxito. Volviendo al menú");
         currentPhase = 0;
 
     }

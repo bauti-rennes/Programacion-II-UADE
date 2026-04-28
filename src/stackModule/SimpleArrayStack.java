@@ -15,7 +15,7 @@ public class SimpleArrayStack<E> implements SimpleStack<E> {
     @Override
     public void push(E element) {
 
-        validateSize(size + 1); //COPIAR EN ALGÚN LADO LA FUNCIÓN validateSize que hizo él
+        validateSize(size + 1);
         elements [size] = element;
         size++;
     }
@@ -23,7 +23,7 @@ public class SimpleArrayStack<E> implements SimpleStack<E> {
     @Override
     public E pop() {
 
-        if (isEmpty()) throw new NoSuchElementException("Stack is empty."); //si está vacía tiro un exception
+        if (isEmpty()) throw new NoSuchElementException("El Stack está vacío."); //si está vacía tiro un exception
         E element = elements [size-1];
         elements [size-1] = null;
         size --;
@@ -33,7 +33,7 @@ public class SimpleArrayStack<E> implements SimpleStack<E> {
 
     @Override
     public E peek() {
-        if (isEmpty()) throw new NoSuchElementException("Stack is empty."); //si está vacía tiro un exception
+        if (isEmpty()) throw new NoSuchElementException("El Stack está vacío."); //si está vacía tiro un exception
         return elements[size-1]; //devuelve el último elemento
     }
 

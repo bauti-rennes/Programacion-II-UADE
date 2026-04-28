@@ -4,24 +4,24 @@ import java.util.NoSuchElementException;
 
 public class SimpleArrayPriorityQueue<E> implements SimplePriorityQueue<E> {
 
-    // ---Defino variables---
-    private E[] elements; //Por qué es un E[] ??? qué signiica eso. ponerme al día
+    // Defino variables
+    private E[] elements;
     private int[] priorities;
     public static final int DEFAULT_CAPACITY = 4;
     private int size = 0;
 
 
-    // Esto es el CONSTRUCTOR
+    //Constructor
     public SimpleArrayPriorityQueue() {
 
-        elements = (E[]) new Object[DEFAULT_CAPACITY]; //¿por qué acá puede poner Object sin definir el tipo de objeto?. Entender esto de java.
+        elements = (E[]) new Object[DEFAULT_CAPACITY];
         priorities = new int[DEFAULT_CAPACITY];
 
     }
 
     public SimpleArrayPriorityQueue(int capacity) {
 
-        elements = (E[]) new Object[capacity]; //¿por qué acá puede poner Object sin definir el tipo de objeto?. Entender esto de java.
+        elements = (E[]) new Object[capacity];
         priorities = new int[capacity];
     }
 
@@ -64,7 +64,7 @@ public class SimpleArrayPriorityQueue<E> implements SimplePriorityQueue<E> {
 
     @Override
     public E peek() {
-        return elements[0]; //devuelve el primero porque usa estrategia LIFO
+        return elements[0]; //devuelve el primero porque usa estrategia lifo
     }
 
     @Override

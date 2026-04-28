@@ -56,26 +56,26 @@ public class ListExercise extends Exercise {
 		}
 
 		System.out.println("Elegir una opción:"
-				+ "\nadd: Agregar elemento "
-				+ "\nremoveIndex: Eliminar elemento por índice "
-				+ "\nremoveRef: Eliminar elemento por referencia "
-				+ "\nclear: Vaciar la lista "
+				+ "\na: Agregar elemento "
+				+ "\nrIndex: Eliminar elemento por índice "
+				+ "\nrRef: Eliminar elemento por referencia "
+				+ "\nv: Vaciar la lista "
 				+ "\nmm: Menú principal");
 
 		String userInput = scanner.nextLine().toLowerCase();
 
 		switch(userInput) {
 
-		case "add":
+		case "a":
 			currentPhase = 1;
 			break;
-		case "removeindex":
+		case "rindex":
 			currentPhase = 2;
 			break;
-		case "removeref":
+		case "rref":
 			currentPhase = 3;
 			break;
-		case "clear":
+		case "v":
 			currentPhase = 4;
 			break;
 		case "mm":
@@ -122,7 +122,7 @@ public class ListExercise extends Exercise {
 
 			boolean bandera_2 = true;
 			while (bandera_2) {
-				System.out.println("\n¿Repetir operación? (y / n)");
+				System.out.println("\n¿Repetir operación? (s / n)");
 				String rep = scanner.nextLine().toLowerCase();
 				if (rep.equals("n")) {
 					bandera = false;
@@ -130,7 +130,7 @@ public class ListExercise extends Exercise {
 					System.out.println("\nVolviendo al menú");
 					currentPhase = 0;  //Esto es para que en la próxima pasada del while me lleve al menu
 				} else {
-					if (rep.equals("y")) {
+					if (rep.equals("s")) {
 						System.out.println("\nRepitiendo operación...");
 						bandera_2 = false;
 					} else {
@@ -173,7 +173,7 @@ public class ListExercise extends Exercise {
 			}
 
 			while (bandera_2){
-				System.out.println("\n¿Repetir operación? (y / n)");
+				System.out.println("\n¿Repetir operación? (s / n)");
 				String rep = scanner.nextLine().toLowerCase();
 				if (rep.equals("n"))
 				{
@@ -183,7 +183,7 @@ public class ListExercise extends Exercise {
 					currentPhase = 0;
 				}
 				else  {
-					if (rep.equals("y")){
+					if (rep.equals("s")){
 						System.out.println("\nRepitiendo operación...");
 						bandera_2 = false;
 					}
@@ -221,7 +221,7 @@ public class ListExercise extends Exercise {
 
 			boolean bandera_2 = true;
 			while (bandera_2){
-				System.out.println("\n¿Repetir operación? (y / n)");
+				System.out.println("\n¿Repetir operación? (s / n)");
 				String rep = scanner.nextLine().toLowerCase();
 				if (rep.equals("n"))
 				{
@@ -231,7 +231,7 @@ public class ListExercise extends Exercise {
 					currentPhase = 0;
 				}
 				else  {
-					if (rep.equals("y")){
+					if (rep.equals("s")){
 						System.out.println("\nRepitiendo operación...");
 						bandera_2 = false;
 					}
