@@ -147,7 +147,7 @@ public class SimpleLinkedDictionary<K,V> implements SimpleDictionary<K,V>{
     @Override
     public K[] keys() {
 
-        //Inicializo lista de keys
+        //Inicializo array de keys
         K[] result = (K[]) new Object[size];
 
         //Creo el current

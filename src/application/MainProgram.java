@@ -7,6 +7,7 @@ import dictionaryModule.LoginSystem;
 import listModule.ListExercise;
 import priorityQueueModule.PriorityQueueExercise;
 import queueModule.QueueExercise;
+import recursionModule.RecursionExercise;
 import setModule.SetExercise;
 import stackModule.StackExercise;
 
@@ -69,7 +70,8 @@ public class MainProgram {
 				"\n4 - Ejercicio de colas" +
 				"\n5 - Ejercicio de conjuntos" +
 				"\n6 - Ejercicio de colas de prioridad" +
-				"\n7 - Ejercicio de diccionarios")
+				"\n7 - Ejercicio de diccionarios" +
+				"\n8 - Ejercicio de recursividad")
 		;
 
 		//Esto es para almacenar en un string lo que puso el usuario
@@ -101,6 +103,9 @@ public class MainProgram {
 			break;
 		case "7":
 			exercise = new LoginSystem(scanner);
+			break;
+		case "8":
+			exercise = new RecursionExercise(scanner);
 			break;
 		default:
 			//Esto sería como el "else" de python
