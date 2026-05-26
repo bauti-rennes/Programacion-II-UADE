@@ -4,13 +4,15 @@ import listModule.SimpleArrayList;
 import listModule.SimpleLinkedList;
 
 public class BST <E  extends Comparable<E>>{
+
     public TreeNode<E> root = null;
     private int size = 0;
-
 
     public void insert(E value) {
         root = insertRecursive(root, value);
     }
+
+
     // Recibe el nodo como estaba antes de insertar
     // Devuelve el nuevo nodo en ese mismo lugar
     // (Puede recibir null con el espacio vacio)
@@ -30,7 +32,7 @@ public class BST <E  extends Comparable<E>>{
 
         // Si es menor seguimos por el hijo izq
         if (comparison < 0) {
-            current.left = insertRecursive(current.left, value);
+            current.left = insertRecursive(current.left, value); //Paso por parámetro el current.left y lo guardo sobre el mismo current.left
         }
 
         // Si es "Mayor seguimos por el hijo derecho
@@ -48,6 +50,7 @@ public class BST <E  extends Comparable<E>>{
     public void remove(E value) {
         root = removeRecursive(root, value);
     }
+
     public TreeNode<E> removeRecursive(TreeNode<E> current, E value) {
         // Caso Base: Llegamos al final y no estaba el value
         if (current == null) {
@@ -63,7 +66,7 @@ public class BST <E  extends Comparable<E>>{
                 return null;
             }
             // Caso 2: tiene un solo hijo
-            else if (current.left == null) {
+            else if (current.left == null) { //el bloque condicional solo llega acá si alguno de los dos (left o right) no es null
                 size--;
                 return current.right;
             } else if (current.right == null) {
@@ -91,7 +94,7 @@ public class BST <E  extends Comparable<E>>{
         return current;
     }
 
-    // PAra encontrar el minimo vamos para la izq a fondo
+    // Para encontrar el minimo vamos para la izq a fondo
     private TreeNode<E> getMinNode(TreeNode<E> current) {
         while (current.left != null) {
             current = current.left;
@@ -115,4 +118,41 @@ public class BST <E  extends Comparable<E>>{
         preOrderDFS(current.left, list);
         preOrderDFS(current.right, list);
     }
+
+    //hacer los otros dos tipos de order
+
+    // In-order
+    public SimpleLinkedList<E> inOrder() {
+        SimpleLinkedList<E> result = new SimpleLinkedList<E>();
+        inOrderDFS(root, result);
+        return result;
+    }
+
+    private void inOrderDFS(TreeNode<E> current, SimpleLinkedList<E> list) {
+        if (current == null) {
+            return;
+        }
+        inOrderDFS(current.left, list);
+        list.add(current.value);
+        inOrderDFS(current.right, list);
+
+    }
+
+    // Post-order
+    public SimpleLinkedList<E> postOrder() {
+        SimpleLinkedList<E> result = new SimpleLinkedList<E>();
+        postOrderDFS(root, result);
+        return result;
+    }
+
+    private void postOrderDFS(TreeNode<E> current, SimpleLinkedList<E> list) {
+        if (current == null) {
+            return;
+        }
+        postOrderDFS(current.left, list);
+        postOrderDFS(current.right, list);
+        list.add(current.value);
+
+    }
+
 }
