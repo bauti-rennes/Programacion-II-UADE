@@ -1,21 +1,13 @@
 package treeModule;
 
-import listModule.SimpleArrayList;
-import listModule.SimpleLinkedList;
+public class AVL<E extends Comparable<E>> extends BST<E> {
 
-public class BST <E  extends Comparable<E>>{
-
-    protected TreeNode<E> root = null;
-    protected int size = 0;
-
-    public void insert(E value) {
-        root = insertRecursive(root, value);
-    }
 
     // Recibe el nodo como estaba antes de insertar
     // Devuelve el nuevo nodo en ese mismo lugar
     // (Puede recibir null con el espacio vacio)
     // (Puede que reciba el mismo nodo que recibio)
+    @Override
     protected TreeNode<E> insertRecursive(TreeNode<E> current, E value) {
         // Caso base: encontramos un lugar vacio
         // Insertamos en ese lugar, devolviendo uno nuevo
@@ -40,16 +32,17 @@ public class BST <E  extends Comparable<E>>{
             current.right = insertRecursive(current.right, value);
         }
 
+        //Si no queremos cuplidacods, cortamos como hacíamos en la clase BST
+        else return current;
+
         // Si llegamos aca no hubieron cambios
         // Retornamos el mismo nodo
-        return current;
+        //Lo que cambia con al clase BST es que acá le ponemos el rebalanceNode
+        return rebalanceNode(current);
 
     }
 
-    public void remove(E value) {
-        root = removeRecursive(root, value);
-    }
-
+    @Override
     protected TreeNode<E> removeRecursive(TreeNode<E> current, E value) {
         // Caso Base: Llegamos al final y no estaba el value
         if (current == null) {
@@ -90,91 +83,84 @@ public class BST <E  extends Comparable<E>>{
             current.right = removeRecursive(current.right, value);
         }
 
-        return current;
+        return rebalanceNode(current);
     }
 
-    // Para encontrar el minimo vamos para la izq a fondo
-    protected TreeNode<E> getMinNode(TreeNode<E> current) {
-        while (current.left != null) {
-            current = current.left;
-        }
-        return current;
-    }
-
-
-    public int height()
+    private TreeNode<E> rebalanceNode(TreeNode<E> node)
     {
-        return getNodeHeightRecursive(root);
+
+        int bf = getNodeBalanceFactor(node);
+
+        //Casos L
+        if(bf > 1)
+        {
+            //Caso LL
+
+            if (getNodeBalanceFactor(node.left)>= 0)
+            {
+                return rotateRight(node);
+            }
+
+            //Caso LR
+            else return rotateLeftRight(node);
+
+        }
+
+        //Casos R
+        if(bf < 1)
+        {
+            //Caso RR
+            if(getNodeBalanceFactor(node.right) <= 0)
+            {
+                return rotateLeft(node);
+            }
+
+            //Caso RL
+            else return rotateRightLeft(node);
+        }
+
+        //Si el nodo no esta desbalanceado, lo devolvemos igual
+        return node;
+
     }
 
-    protected int getNodeHeightRecursive(TreeNode<E> current)
+    private TreeNode<E> rotateRight(TreeNode<E> y) {
+
+        //Variables auxiliares
+        TreeNode<E> x = y.left;
+        TreeNode<E> t2 = x.right;
+
+        //Cambiamos de lugar las referencias
+        x.right = y;
+        y.left = t2;
+
+        //X pasa a estar en el lugar de y
+        return x;
+    }
+
+    private TreeNode<E> rotateLeft(TreeNode<E> x) {
+
+        //Variables auxiliares
+        TreeNode<E> y = x.right;
+        TreeNode<E> t2 = x.left;
+
+        //Cambiamos de lugar las referencias
+        y.left = x;
+        x.right = t2;
+
+        //X pasa a estar en el lugar de y
+        return y;
+    }
+
+    private TreeNode<E> rotateLeftRight(TreeNode<E> node)
     {
-        //Caso base: llegamos al final del árbol
-        if (current == null) return -1;
-
-        //Paso recursivo: contamos +1
-        //Nos quedamos con la mayor altura de entre los hijos
-        return 1 + Math.max(getNodeHeightRecursive(current.left),getNodeHeightRecursive(current.right));
+        node.left = rotateLeft(node.left);
+        return rotateRight(node);
     }
 
-    //Obtener el FB de un nodo
-    protected int getNodeBalanceFactor(TreeNode<E> node)
+    private TreeNode<E> rotateRightLeft(TreeNode<E> node)
     {
-        //Altura del subárbol izquierdo - Altura del subárbol derecho
-        return getNodeHeightRecursive(node.left)  - getNodeHeightRecursive(node.right);
+        node.right = rotateRight(node.right);
+        return rotateLeft(node);
     }
-
-    // DFS
-    // Pre-order
-    public SimpleLinkedList<E> preOrder() {
-        SimpleLinkedList<E> result = new SimpleLinkedList<E>();
-        preOrderDFS(root, result);
-        return result;
-    }
-
-    private void preOrderDFS(TreeNode<E> current, SimpleLinkedList<E> list) {
-        if (current == null) {
-            return;
-        }
-        list.add(current.value);
-        preOrderDFS(current.left, list);
-        preOrderDFS(current.right, list);
-    }
-
-    //hacer los otros dos tipos de order
-
-    // In-order
-    public SimpleLinkedList<E> inOrder() {
-        SimpleLinkedList<E> result = new SimpleLinkedList<E>();
-        inOrderDFS(root, result);
-        return result;
-    }
-
-    private void inOrderDFS(TreeNode<E> current, SimpleLinkedList<E> list) {
-        if (current == null) {
-            return;
-        }
-        inOrderDFS(current.left, list);
-        list.add(current.value);
-        inOrderDFS(current.right, list);
-
-    }
-
-    // Post-order
-    public SimpleLinkedList<E> postOrder() {
-        SimpleLinkedList<E> result = new SimpleLinkedList<E>();
-        postOrderDFS(root, result);
-        return result;
-    }
-
-    private void postOrderDFS(TreeNode<E> current, SimpleLinkedList<E> list) {
-        if (current == null) {
-            return;
-        }
-        postOrderDFS(current.left, list);
-        postOrderDFS(current.right, list);
-        list.add(current.value);
-
-    }
-
 }
