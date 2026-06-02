@@ -8,6 +8,10 @@ public class BST <E  extends Comparable<E>>{
     protected TreeNode<E> root = null;
     protected int size = 0;
 
+    public BST() {root = null;}
+
+    public BST (E firstValue) {root = new TreeNode<E> (firstValue); size = 1;}
+
     public void insert(E value) {
         root = insertRecursive(root, value);
     }
@@ -175,6 +179,16 @@ public class BST <E  extends Comparable<E>>{
         postOrderDFS(current.right, list);
         list.add(current.value);
 
+    }
+
+    public int size() {return size;}
+
+    public boolean isEmpty() {return size == 0;}
+
+    public void clear()
+    {
+        root = null;
+        size = 0;
     }
 
 }
