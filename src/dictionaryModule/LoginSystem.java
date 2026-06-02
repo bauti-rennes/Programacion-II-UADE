@@ -182,7 +182,6 @@ public class LoginSystem extends Exercise {
             } else if (blocked_users.contains(username)) {
                 System.out.println("\nEl usuario está bloqueado por demasiados intentos fallidos. Intente con otro usuario o vuelva a intentarlo más tarde.");
                 username = ""; //Esto simplemente lo hacemos para que se quede en el bucle while
-                // TODO: Fijarse la manera de contemplar la forma de volver al menu
             }
 
             if (username == "") {
