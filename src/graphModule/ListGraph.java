@@ -18,7 +18,7 @@ public class ListGraph<T> implements Graph<T> {
     private SimpleDictionary<T, SimpleList<Edge<T>>> adjacencyList;
 
     public ListGraph() {
-        adjacencyList = new SimpleArrayDictionary<T,SimpleLinkedList<Edge<T>>>;
+        adjacencyList = new SimpleArrayDictionary<T,SimpleLinkedList<Edge<T>>>();
     }
 
     @Override
@@ -104,7 +104,7 @@ public class ListGraph<T> implements Graph<T> {
     }
 
     @Override
-    public boolean RemoveEdge(T from, T to) {
+    public boolean removeEdge(T from, T to) {
 
         // Buscamos el edge de from a to
         Edge<T> edge = getEdge(from, to);

@@ -1,11 +1,9 @@
 package graphModule;
 
-public class Edge {
+public class Edge<T> {
 
-
-    //COMPLETAR
-
-    public desination
+    public T destination;
+    public int weight;
 
     public Edge(T destination, int weight){
         this.destination = destination;
