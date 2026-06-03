@@ -15,17 +15,16 @@ public class ListGraph<T> implements Graph<T> {
     No se pueden instanciar interfaces, solo ipmlementaciones así que por eso
     en el constructor se usan las implementaciones
      */
-    private SimpleDictionary<T, SimpleList<Edge<T>>> adjacencyList;
+    private SimpleDictionary<T, SimpleLinkedList<Edge<T>>> adjacencyList;
 
     public ListGraph() {
         adjacencyList = new SimpleArrayDictionary<T,SimpleLinkedList<Edge<T>>>();
     }
 
     @Override
-
     //Esta es la función más importante, la usa todo el resto de funciones
     //Devolver la arista que va de "from" a "to"
-    private Edge<T> getEdge(T from, T to)
+    public Edge<T> getEdge(T from, T to)
     {
         // Si no esta el nodo de origen, no va a estar el edge
         if(!containsVertex(from)) return null;
@@ -51,7 +50,7 @@ public class ListGraph<T> implements Graph<T> {
     public boolean addVertex(T vertex) {
         if(containsVertex(vertex)) return false;
 
-        adjacencyList.put(vertex, new SimpleLinkedList<Edge<T>>()
+        adjacencyList.put(vertex, new SimpleLinkedList<Edge<T>>());
         return true;
     }
 

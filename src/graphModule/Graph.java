@@ -12,6 +12,8 @@ public interface Graph<T> {
     public boolean containsVertex(T vertex);
     public boolean containsEdge(T from, T to);
     public int getWeight(T from, T to);
+    public Edge<T> getEdge(T from, T to);
+
 
 
 }
