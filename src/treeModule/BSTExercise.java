@@ -12,7 +12,7 @@ public class BSTExercise extends Exercise {
 
     public BSTExercise(Scanner scnr) {
         super(scnr);
-        bst = new BST<ScoreNode>;
+        bst = new BST<ScoreNode>();
     }
 
     @Override
@@ -33,11 +33,11 @@ public class BSTExercise extends Exercise {
                 viewLogic();
                 break;
             case 4:
-                clearLogic();
-                break;
+                addTestValues();
+            break;
             case 5:
-                testLogic();
-                break;
+                clearLogic();
+            break;
 
         }
 
@@ -54,6 +54,7 @@ public class BSTExercise extends Exercise {
                 + "\na: Agregar un puntaje "
                 + "\ne: Eliminar un punaje "
                 + "\nm: Mostrar todos los puntajes "
+                + "\np: Agregar puntajes de prueba "
                 + "\nb: Borrar todo "
                 + "\nmm: Menú principal");
 
@@ -70,8 +71,11 @@ public class BSTExercise extends Exercise {
             case "m":
                 currentPhase = 3;
                 break;
-            case "b":
+            case "p":
                 currentPhase = 4;
+                break;
+            case "b":
+                currentPhase = 5;
                 break;
             case "mm":
                 running = false;
@@ -107,7 +111,7 @@ public class BSTExercise extends Exercise {
 
         TreeNode<ScoreNode> newValue = new TreeNode<ScoreNode>(nodeValue);
 
-        bst.insertRecursive(newValue, nodeValue.getScore());
+        bst.insertRecursive(newValue, nodeValue);
 
         backToMenu = returnMenu();
         if (backToMenu == true){

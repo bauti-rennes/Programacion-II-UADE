@@ -1,6 +1,6 @@
 package treeModule;
 
-public class ScoreNode implements Comparable {
+public class ScoreNode implements Comparable<ScoreNode> {
 
     private Float score;
     private Integer enemies_destroyed;
@@ -43,7 +43,7 @@ public class ScoreNode implements Comparable {
 
 
     @Override
-    public int compareTo(Object otherScoreNode) {
-        return this.score > ((ScoreNode) otherScoreNode).score ? -1 : 1;
+    public int compareTo(ScoreNode otherScoreNode) {
+        return this.score > otherScoreNode.score ? -1 : 1;
     }
 }
