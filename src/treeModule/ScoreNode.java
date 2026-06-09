@@ -42,4 +42,8 @@ public class ScoreNode implements Comparable {
     }
 
 
+    @Override
+    public int compareTo(Object otherScoreNode) {
+        return this.score > ((ScoreNode) otherScoreNode).score ? -1 : 1;
+    }
 }
