@@ -87,12 +87,27 @@ public class BSTExercise extends Exercise {
     //Agregar puntajes(ScoreNodes) al árbol
     private void addLogic(){
 
+        //TODO agregar funciones while para validacion de inputs
 
-        System.out.println("\nAgregar puntuación (enemigos, tiempo)");
+        System.out.println("\nIngrese cantidad de enemigos eliminados:");
 
-        String userInput = scanner.nextLine().toLowerCase();
+        Integer enemies_destroyed = scanner.nextLine();
 
-        insertRecursive();
+        System.out.println("\nIngrese cantidad de tiempo transcurrido:");
+
+        Float seconds = scanner.nextLine();
+
+        System.out.println("\nIngrese nombre del jugador:");
+
+        String player = scanner.nextLine();
+
+        //Inicializar nodo
+
+        ScoreNode nodeValue = new ScoreNode(enemies_destroyed, seconds, player);
+
+        TreeNode<ScoreNode> newValue = new TreeNode<ScoreNode>(nodeValue);
+
+        bst.insertRecursive(newValue, nodeValue.getScore());
 
         backToMenu = returnMenu();
         if (backToMenu == true){
