@@ -1,5 +1,8 @@
 package dictionaryModule;
 
+import listModule.SimpleArrayList;
+import listModule.SimpleList;
+
 public class SimpleLinkedDictionary<K,V> implements SimpleDictionary<K,V>{
 
     private SimpleDictionaryNode<K,V> first = null;
@@ -145,10 +148,10 @@ public class SimpleLinkedDictionary<K,V> implements SimpleDictionary<K,V>{
     }
 
     @Override
-    public K[] keys() {
+    public SimpleList<K> keys() {
 
         //Inicializo array de keys
-        K[] result = (K[]) new Object[size];
+        SimpleList<K> result = new SimpleArrayList<K>();
 
         //Creo el current
         SimpleDictionaryNode<K, V> current = first;

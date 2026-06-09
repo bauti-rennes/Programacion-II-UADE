@@ -1,5 +1,8 @@
 package dictionaryModule;
 
+import listModule.SimpleArrayList;
+import listModule.SimpleList;
+
 public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K,V>{
 
     private K[] keys;
@@ -86,12 +89,13 @@ public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K,V>{
     }
 
     @Override
-    public K[] keys() {
+    public SimpleList<K> keys() {
 
-        K[] result = (K[]) new Object[size];
+        SimpleList<K> result = new SimpleArrayList<K>();
 
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < size; i++) {
             result[i] = keys[i];
+        }
 
         return result;
 

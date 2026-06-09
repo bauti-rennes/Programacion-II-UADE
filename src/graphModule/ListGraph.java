@@ -44,7 +44,7 @@ public class ListGraph<T> implements Graph<T> {
     }
 
     @Override
-    public T[] vertices() {return adjacencyList.keys();}
+    public SimpleList<T> vertices() {return adjacencyList.keys();}
 
     @Override
     public boolean addVertex(T vertex) {
@@ -65,7 +65,7 @@ public class ListGraph<T> implements Graph<T> {
         adjacencyList.remove(vertex) ;
 
         //Y después lo sacamos de las listas de edges de los otros vértices (chequear, creo que no)
-        T[] vertices = vertices();
+        SimpleList<T> vertices = vertices();
         for(int i= 0; i < vertices.length; i++)
             removeEdge(vertices [i], vertex);
 

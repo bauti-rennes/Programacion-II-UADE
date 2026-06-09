@@ -1,10 +1,11 @@
 package graphModule;
 
+import listModule.SimpleList;
+
 public interface Graph<T> {
 
     //CHEQUEAR CON GRABACION
-
-    public T[] vertices();
+    public SimpleList<T> vertices();
     public boolean addVertex(T vertex);
     public boolean removeVertex(T vertex);
     public boolean addEdge(T from, T to, int weight);
@@ -13,7 +14,7 @@ public interface Graph<T> {
     public boolean containsEdge(T from, T to);
     public int getWeight(T from, T to);
     public Edge<T> getEdge(T from, T to);
-
+    public SimpleList<Edge<T>> getNeighbors(T vertex);
 
 
 }
