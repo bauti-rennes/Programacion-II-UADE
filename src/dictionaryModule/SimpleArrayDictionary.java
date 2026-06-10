@@ -94,7 +94,7 @@ public class SimpleArrayDictionary<K,V> implements SimpleDictionary<K,V>{
         SimpleList<K> result = new SimpleArrayList<K>();
 
         for (int i = 0; i < size; i++) {
-            result[i] = keys[i];
+            result.add(keys[i]);
         }
 
         return result;

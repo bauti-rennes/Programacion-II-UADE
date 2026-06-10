@@ -66,7 +66,7 @@ public class ListGraph<T> implements Graph<T> {
 
         //Y después lo sacamos de las listas de edges de los otros vértices (chequear, creo que no)
         SimpleList<T> vertices = vertices();
-        for(int i= 0; i < vertices.length; i++)
+        for(int i= 0; i < vertices.size(); i++)
             removeEdge(vertices [i], vertex);
 
         return true;
@@ -123,6 +123,12 @@ public class ListGraph<T> implements Graph<T> {
     //Chequear esta función
     public boolean containsVertex(T vertex) {
         return adjacencyList.containsKey(vertex);
+    }
+    @Override
+    //Chequear esta función
+    public SimpleList<Edge<T>> getNeighbors(T vertex) {
+        
+        return adjacencyList.get(vertex);
     }
 
     @Override

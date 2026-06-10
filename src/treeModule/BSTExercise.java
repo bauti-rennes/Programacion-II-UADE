@@ -26,7 +26,9 @@ public class BSTExercise extends Exercise {
             case 1:
                 addLogic();
                 break;
-            case 2:
+            /*
+
+                case 2:
                 deleteLogic();
                 break;
             case 3:
@@ -38,6 +40,8 @@ public class BSTExercise extends Exercise {
             case 5:
                 clearLogic();
             break;
+            *
+             */
 
         }
 

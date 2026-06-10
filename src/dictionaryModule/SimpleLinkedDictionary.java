@@ -157,15 +157,12 @@ public class SimpleLinkedDictionary<K,V> implements SimpleDictionary<K,V>{
         SimpleDictionaryNode<K, V> current = first;
 
         //Meto la primera key en el resultado
-        result[0] = current.key;
-
-        int i = 1;
+        result.add(current.key);
 
         //Meto el resto de keys en el resultado
         while (current.next != null) {
-            result[i] = current.next.key;
-            i++;
             current = current.next;
+            result.add(current.key);
         }
 
         return result;

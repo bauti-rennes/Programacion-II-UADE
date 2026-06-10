@@ -4,6 +4,7 @@ package application;
 import java.util.Scanner;
 
 import dictionaryModule.LoginSystem;
+import graphModule.DijkstraSolverExercise;
 import listModule.ListExercise;
 import priorityQueueModule.PriorityQueueExercise;
 import queueModule.QueueExercise;
@@ -71,7 +72,8 @@ public class MainProgram {
 				"\n5 - Ejercicio de conjuntos" +
 				"\n6 - Ejercicio de colas de prioridad" +
 				"\n7 - Ejercicio de diccionarios" +
-				"\n8 - Ejercicio de recursividad")
+				"\n8 - Ejercicio de recursividad" +
+				"\n9 - Ejercicio de Dijkstra")
 		;
 
 		//Esto es para almacenar en un string lo que puso el usuario
@@ -106,6 +108,9 @@ public class MainProgram {
 			break;
 		case "8":
 			exercise = new RecursionExercise(scanner);
+			break;
+		case "9":
+			exercise = new DijkstraSolverExercise(scanner);
 			break;
 		default:
 			//Esto sería como el "else" de python
