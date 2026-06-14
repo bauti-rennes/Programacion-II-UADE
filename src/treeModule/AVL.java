@@ -107,7 +107,8 @@ public class AVL<E extends Comparable<E>> extends BST<E> {
         }
 
         //Casos R
-        if(bf < 1)
+        // bf < -1 significa que el subárbol derecho tiene altura 2 o más que el izquierdo
+        if(bf < -1)
         {
             //Caso RR
             if(getNodeBalanceFactor(node.right) <= 0)
@@ -142,7 +143,9 @@ public class AVL<E extends Comparable<E>> extends BST<E> {
 
         //Variables auxiliares
         TreeNode<E> y = x.right;
-        TreeNode<E> t2 = x.left;
+        // t2 es el hijo izquierdo de y: después de la rotación pasa a ser el hijo derecho de x
+        // (antes era x.left, lo que era incorrecto — ese es el subárbol A, que no se mueve)
+        TreeNode<E> t2 = y.left;
 
         //Cambiamos de lugar las referencias
         y.left = x;

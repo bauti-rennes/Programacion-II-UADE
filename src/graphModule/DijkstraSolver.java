@@ -28,6 +28,17 @@ public class DijkstraSolver {
         {
             //Inicializo el resultado con todos los vertices y un peso infinito
             result.put(vertices.get(i), new Edge<T>(null, Integer.MAX_VALUE));
+            // Lo que hace aca es darle valor maximo a cada vertice antes de visitarlo,
+            // Asi se ve el diccionario
+            /*
+            * {
+            * a: 0 -> suponiendo que es el origen.
+            * b:max
+            * c:max
+            * d: max
+            *
+            * }
+            * */
 
         }
 
@@ -89,7 +100,7 @@ public class DijkstraSolver {
             //Lo agrego en la lista de visitados así no lo vuelve a recorrer
             visited.add(current);
         }
-
+        System.out.println("result");
         return result;
     }
 

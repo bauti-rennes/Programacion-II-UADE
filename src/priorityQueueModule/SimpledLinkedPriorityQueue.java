@@ -34,23 +34,25 @@ public class SimpledLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
 
         }
 
-        if (current == first){
+        // El loop para por dos razones distintas:
+        // 1) priority < current.priority y no hay más prev → el nuevo va ANTES de current (nuevo first)
+        // 2) priority >= current.priority → encontramos el lugar, el nuevo va DESPUÉS de current
+        if (priority < current.priority) {
+            // Caso 1: el nuevo nodo tiene menor prioridad que todos → pasa a ser el primero
             nodeToAdd.next = current;
             current.prev = nodeToAdd;
             first = nodeToAdd;
-        }
-        else if (current == last)
-            {
-                nodeToAdd.prev = current;
-                current.next = nodeToAdd;
+        } else {
+            // Caso 2: insertamos después de current (cubre tanto el medio como el último)
+            nodeToAdd.prev = current;
+            nodeToAdd.next = current.next;
+            if (current.next != null) {
+                current.next.prev = nodeToAdd;
+            } else {
+                // current era el último, el nuevo pasa a ser el último
                 last = nodeToAdd;
             }
-        else {
-            //son 4 conexiones
-            nodeToAdd.prev = current; //primero modifico el que voy a agregar
-            nodeToAdd.next = current.next; //sigo modificando el que voy a agregar
-            current.next.prev = nodeToAdd; //siempre modifico el current.prev.next (si vengo por la izquierda) o current.next.prev (si vengo por la derecha)
-            current.next = nodeToAdd; //por último modifico el current que tiene un solo punto (en este caso current.next)
+            current.next = nodeToAdd;
         }
 
         size ++;
@@ -76,13 +78,14 @@ public class SimpledLinkedPriorityQueue<E> implements SimplePriorityQueue<E> {
 
         size --;
 
-
-        return (E) firstNode;
+        // Devolvemos el valor guardado en el nodo, no el nodo en sí
+        return firstNode.value;
     }
 
     @Override
     public E peek() {
-        return (E) first;
+        // Devolvemos el valor guardado en el nodo, no el nodo en sí
+        return first.value;
     }
 
     @Override

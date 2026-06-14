@@ -44,6 +44,12 @@ public class ScoreNode implements Comparable<ScoreNode> {
 
     @Override
     public int compareTo(ScoreNode otherScoreNode) {
-        return this.score > otherScoreNode.score ? -1 : 1;
+        // Comparamos por score descendente: mayor score → va a la izquierda → aparece primero en inOrder
+        if (!this.score.equals(otherScoreNode.score)) {
+            return this.score > otherScoreNode.score ? -1 : 1;
+        }
+        // Si el score es igual, desempatamos por nombre de jugador
+        // Esto es necesario para que remove() pueda encontrar el nodo exacto (compareTo == 0)
+        return this.player.compareTo(otherScoreNode.player);
     }
 }

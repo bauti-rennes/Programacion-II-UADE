@@ -6,6 +6,8 @@ import java.util.Scanner;
 import dictionaryModule.LoginSystem;
 import graphModule.DijkstraSolverExercise;
 import listModule.ListExercise;
+import treeModule.BSTExercise;
+import treeModule.AVLExercise;
 import priorityQueueModule.PriorityQueueExercise;
 import queueModule.QueueExercise;
 import recursionModule.RecursionExercise;
@@ -73,7 +75,9 @@ public class MainProgram {
 				"\n6 - Ejercicio de colas de prioridad" +
 				"\n7 - Ejercicio de diccionarios" +
 				"\n8 - Ejercicio de recursividad" +
-				"\n9 - Ejercicio de Dijkstra")
+				"\n9 - Ejercicio de Dijkstra" +
+				"\n10 - Leaderboard BST (TP 08)" +
+				"\n11 - Leaderboard AVL (TP 09)")
 		;
 
 		//Esto es para almacenar en un string lo que puso el usuario
@@ -111,6 +115,12 @@ public class MainProgram {
 			break;
 		case "9":
 			exercise = new DijkstraSolverExercise(scanner);
+			break;
+		case "10":
+			exercise = new BSTExercise(scanner);
+			break;
+		case "11":
+			exercise = new AVLExercise(scanner);
 			break;
 		default:
 			//Esto sería como el "else" de python
