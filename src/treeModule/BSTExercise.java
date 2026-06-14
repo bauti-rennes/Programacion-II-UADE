@@ -97,17 +97,11 @@ public class BSTExercise extends Exercise {
 
         //TODO agregar funciones while para validacion de inputs
 
-        System.out.println("\nIngrese cantidad de enemigos eliminados:");
+        //Llamo a las funciones para setear enemigos, segundos y nombre de jugador (cada una con sus respectivas validaciones)
+        Integer enemies_destroyed = setEnemies();
+        Float seconds = setSeconds();
+        String player = setPlayer();
 
-        Integer enemies_destroyed = scanner.nextLine();
-
-        System.out.println("\nIngrese cantidad de tiempo transcurrido:");
-
-        Float seconds = scanner.nextLine();
-
-        System.out.println("\nIngrese nombre del jugador:");
-
-        String player = scanner.nextLine();
 
         //Inicializar nodo
 
@@ -117,7 +111,8 @@ public class BSTExercise extends Exercise {
 
         bst.insertRecursive(newValue, nodeValue);
 
-        backToMenu = returnMenu();
+        boolean backToMenu = returnMenu();
+
         if (backToMenu == true){
             currentPhase = 0;
         }
@@ -152,5 +147,100 @@ private boolean returnMenu() {
 
 }
 
+private Integer setEnemies() {
+
+    //Inicializo enemies destroyed
+    Integer enemies_destroyed = null;
+
+    //Obligo a entrar en el bucle
+    boolean bandera = true;
+
+    while (bandera) {
+
+        System.out.println("\nIngrese cantidad de enemigos eliminados:");
+
+        //Si lo que ingresa el usuario es un Integer
+        if (scanner.hasNextInt()) {
+
+            enemies_destroyed = scanner.nextInt();
+
+            //Revisa que sea un número válido
+            if (enemies_destroyed >= 0) {
+                //Sale del bucle
+                bandera = false;
+            } else {
+                System.out.println("\nEl valor tiene que ser cero o más");
+            }
+
+            //Si no era un Integer, se repite el bucle
+        } else {
+            System.out.println("\nEl valor tiene que ser un entero");
+        }
+    }
+
+    return enemies_destroyed;
+}
+
+private Float setSeconds() {
+
+    //Inicializo enemies destroyed
+    Float seconds = null;
+
+    //Obligo a entrar en el bucle
+    boolean bandera = true;
+
+    while (bandera) {
+
+        System.out.println("\nIngrese cantidad de tiempo transcurrido:");
+
+        //Si lo que ingresa el usuario es un Float
+        if (scanner.hasNextFloat()) {
+
+            seconds = scanner.nextFloat();
+
+            //Revisa que sea un número válido
+            if (seconds >= 0) {
+                //Sale del bucle
+                bandera = false;
+            } else {
+                System.out.println("\nEl valor tiene que ser cero o más");
+            }
+
+            //Si no era un Float, se repite el bucle
+        } else {
+            System.out.println("\nEl valor tiene que ser de tipo Float");
+        }
+    }
+
+    return seconds;
+
+}
+
+    private String setPlayer() {
+
+        //Inicializo enemies destroyed
+        String player = null;
+
+        //Obligo a entrar en el bucle
+        boolean bandera = true;
+
+        while (bandera) {
+
+            System.out.println("\nIngrese número del jugador:");
+
+            player = scanner.nextLine();
+
+            //Revisa que sea un nombre que no exista
+            if (player == "") { //TODO: ver cómo hacer esto
+                //Sale del bucle
+                bandera = false;
+            } else {
+                System.out.println("\nEl nombre ya existe");
+            }
+        }
+
+        return player;
+
+    }
 
 }

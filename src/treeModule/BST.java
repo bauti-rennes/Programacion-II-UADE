@@ -46,6 +46,7 @@ public class BST <E  extends Comparable<E>>{
 
         // Si llegamos aca no hubieron cambios
         // Retornamos el mismo nodo
+        // SIEMPRE LLEGA ACÁ a menos que se haya insertado finalmente el nodo
         return current;
 
     }

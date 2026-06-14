@@ -66,8 +66,9 @@ public class ListGraph<T> implements Graph<T> {
 
         //Y después lo sacamos de las listas de edges de los otros vértices (chequear, creo que no)
         SimpleList<T> vertices = vertices();
-        for(int i= 0; i < vertices.size(); i++)
-            removeEdge(vertices [i], vertex);
+        for(int i= 0; i < vertices.size(); i++) {
+            removeEdge(vertices.get(i), vertex);
+        }
 
         return true;
     }
