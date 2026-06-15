@@ -8,24 +8,28 @@ import listModule.SimpleList;
 
 
 
-// TODO: Hay que calcular el dijkstra
 // Hay que pedirle al usuario que pida el camino mas corto posible.
 
 public class DijkstraSolverExercise extends Exercise{
-    private int currentPhase = 0;
-     private boolean firstTime = true;
-     private ListGraph<String> graph;
 
+    //Inicializamos variables
+    private int currentPhase = 0;
+    private boolean firstTime = true;
+
+    //Usamos vértices de tipo String porque son nombres de barrios
+    private ListGraph<String> graph;
+
+    //Constructor
     public DijkstraSolverExercise(Scanner scnr) {
         super(scnr);
         graph = new ListGraph<String>();
+        //Metemos los valores de prueba directamente
         addTestValues();
     }
 
     @Override
     protected void exerciseLogic() {
 
-        //El switch lo copypasteamos de ListExercise porqued va a ser igual
         switch (currentPhase) {
             case 0:
                 menuLogic();
@@ -104,6 +108,7 @@ private boolean returnMenu() {
 }
     private void addTestValues() {
 
+        //Primero metemos vértices así después podemos meter edges
         graph.addVertex("Casa");
         graph.addVertex("Belgrano");
         graph.addVertex("Monserrat");
@@ -122,36 +127,38 @@ private boolean returnMenu() {
 
 
     }
+
+    //Esto es para printear el grafo (ver conexiones entre barrios y costos)
     private void printGraph() {
 
-        
+        //Para mostrar el grafo, obtenemos la lista de vértices
         SimpleList<String> verticesGraph = graph.vertices();
 
+        System.out.println("-----Conexiones-----");
+        //Iteramos sobre la lista de vértices
         for (int i = 0; i < verticesGraph.size(); i++) {
+
+            //Guardamos el nombre del vértice
             String vertex = verticesGraph.get(i);
-            
+
+            //Obtenemos lista de Edges para este vértice específico
             SimpleList<Edge<String>> edges = graph.getNeighbors(vertex);
-            System.out.println();
+
+            //Printeamos cada Edge
             for (int f = 0; f < edges.size(); f++) {
-                
                 System.out.println(vertex + " -> " + edges.get(f).destination + ": " + edges.get(f).weight);
             }
 
         }
 
+        //para volver al menú
         currentPhase = 0;
-        
-        
-        
-        
 
-        // Casa :
-        // Belgrano(1) Recoleta(8) Pinamar(250)
         return;
-
 
     }
 
+    //TODO esto vuela??????
     private void showDijkstra() {
         // <T> graphResultDijstra = dijkstra
 
@@ -163,10 +170,13 @@ private boolean returnMenu() {
 
     // Pide al usuario un nodo y valida que exista en el grafo antes de continuar
     private String askNode(String prompt) {
+
+        //Conseguimos la lista de vertices para mostrarsela después al usuario
         SimpleList<String> vertices = graph.vertices();
         String input = null;
         boolean valid = false;
 
+        //se reinicia el bucle si se selecciona un vértice inexistente
         while (!valid) {
             System.out.println(prompt);
 
@@ -174,15 +184,16 @@ private boolean returnMenu() {
             System.out.print("Nodos disponibles: ");
             for (int i = 0; i < vertices.size(); i++) {
                 System.out.print(vertices.get(i) + (i < vertices.size() - 1 ? ", " : "\n"));
+                //La coma solo se printea si NO es el último vértice
             }
 
-            input = scanner.nextLine().trim();
+            input = scanner.nextLine().trim(); //El trim elimina espacios vacios en lo que ingresa el usuario
 
             // Verificamos que el nodo ingresado exista en el grafo
             boolean found = false;
             for (int i = 0; i < vertices.size(); i++) {
-                if (vertices.get(i).equalsIgnoreCase(input)) {
-                    input = vertices.get(i); // usamos el nombre exacto del grafo
+                if (vertices.get(i).equalsIgnoreCase(input)) { //IgnoreCase hace que no importen mayusculas o minusculas
+                    input = vertices.get(i); // Cambiamos el input por el nombre exacto del grafo (por tema mayusculas)
                     found = true;
                     break;
                 }
@@ -191,7 +202,7 @@ private boolean returnMenu() {
             if (found) {
                 valid = true;
             } else {
-                System.out.println("\nNodo '" + input + "' no encontrado. Intentá de nuevo.");
+                System.out.println("\nNodo " + input + " no encontrado. Intentá de nuevo.");
             }
         }
 
@@ -201,19 +212,27 @@ private boolean returnMenu() {
     // Pide origen y destino, calcula el camino más corto y lo muestra
     private void shortestPathLogic() {
 
+        //Esas funciones incluyen validacion
         String origin = askNode("\nIngresá el nodo de origen:");
         String destination = askNode("\nIngresá el nodo de destino:");
 
+        //result tiene 2 elementos: shorterPath y weight
         DijstraShorterPath<String> result = new DijstraShorterPath<>(graph, origin, destination);
 
-        if (result.getWeight() == -1) {
-            System.out.println("\nNo existe camino entre '" + origin + "' y '" + destination + "'.");
-        } else {
+        //Puede ser que no haya camino
+        if (result.getWeight() == -1)
+        {
+            System.out.println("\nNo existe camino entre " + origin + " y " + destination + ".");
+        }
+        else //En caso de que sí haya camino...
+        {
+            //getShorterPath devuelve una lista con el camino más corto
             ArrayList<String> path = result.getShorterPath();
 
             System.out.print("\nCamino más corto: ");
+            //Imprimo la lista iterándola
             for (int i = 0; i < path.size(); i++) {
-                System.out.print(path.get(i) + (i < path.size() - 1 ? " → " : ""));
+                System.out.print(path.get(i) + (i < path.size() - 1 ? " -> " : ""));
             }
             System.out.println("\nCosto total: " + result.getWeight());
         }

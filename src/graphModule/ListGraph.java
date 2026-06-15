@@ -7,12 +7,12 @@ import dictionaryModule.SimpleArrayDictionary;
 
 public class ListGraph<T> implements Graph<T> {
 
-    //Es un diccionario que tiene T como llaves y una lista de Edges (aristas) como claves (chequear)
+    //La lista de adyacencia es un diccionario que tiene T como llaves y una lista de Edges (aristas) como valores
     /*
     Usamos interfaces SimpleDictionary y SimpleList
     en lugar de las implementaciones SimpleArrayDictionary y SimpleLinkedList
     porque queremos que puedan tomar cualquier valor a la hora de instanciarlas.
-    No se pueden instanciar interfaces, solo ipmlementaciones así que por eso
+    No se pueden instanciar interfaces, solo implementaciones así que por eso
     en el constructor se usan las implementaciones
      */
     private SimpleDictionary<T, SimpleLinkedList<Edge<T>>> adjacencyList;
@@ -22,18 +22,18 @@ public class ListGraph<T> implements Graph<T> {
     }
 
     @Override
-    //Esta es la función más importante, la usa todo el resto de funciones
+    //Esta es la función más importante, la usa el resto de funciones
     //Devolver la arista que va de "from" a "to"
     public Edge<T> getEdge(T from, T to)
     {
-        // Si no esta el nodo de origen, no va a estar el edge
+        // Si no está el nodo de origen en adjacencyList, no va a estar el edge
         if(!containsVertex(from)) return null;
 
         // Si llegamos hasta aca, podemos buscar la lista de edge:
-        SimpleList<Edge<T>> edges = adjacencyList.get(from);
+        SimpleList<Edge<T>> edges = adjacencyList.get(from); //diccionario.get(key) busca el valor de esa key, que en este caso es una lista
 
         //Iteramos la lista hasta encontrar el edge a devolver
-        //Acá se entiende por qué usamos ArrayList y no LinkedList (es más facil de recorrer)
+        //Acá se entiende por qué usamos ArrayList y no LinkedList (es más fácil de recorrer)
         for(int i = 0; i < edges.size(); i++)
         {
             if (edges.get(i).destination.equals(to)) return edges.get(i);
@@ -43,9 +43,11 @@ public class ListGraph<T> implements Graph<T> {
         return null;
     }
 
+    //Devuelve lista de vertices
     @Override
     public SimpleList<T> vertices() {return adjacencyList.keys();}
 
+    //False si ya está el vértice; True si se añadió el vértice
     @Override
     public boolean addVertex(T vertex) {
         if(containsVertex(vertex)) return false;
@@ -60,13 +62,15 @@ public class ListGraph<T> implements Graph<T> {
         //Si no está el vértice, no se puede remover
         if(!containsVertex(vertex)) return false;
 
-        //Para cada uno, intentamos remover el edge de ese a vertex
-        //Sacamos el vértice de las keys
+        //Eliminamos el vértice como llave del diccionario, eso también elimina su lista de edges
         adjacencyList.remove(vertex) ;
 
-        //Y después lo sacamos de las listas de edges de los otros vértices (chequear, creo que no)
+        //Y después lo sacamos de las listas de edges de los otros vértices
+        //Para eso hacemos lista de los vértices
         SimpleList<T> vertices = vertices();
+        //Para cada vértice...
         for(int i= 0; i < vertices.size(); i++) {
+            //Si existe arista que vaya al vértice a eliminar, la borro
             removeEdge(vertices.get(i), vertex);
         }
 
@@ -81,7 +85,7 @@ public class ListGraph<T> implements Graph<T> {
         addVertex(from);
         addVertex(to);
 
-        //Buscamos el edge from a null
+        //Devuelve el Edge si existe. Si no existe, devuelve null
         Edge<T> edge = getEdge(from,to);
 
         //Si no existe el edge, lo creamos
@@ -109,7 +113,7 @@ public class ListGraph<T> implements Graph<T> {
         // Buscamos el edge de from a to
         Edge<T> edge = getEdge(from, to);
 
-        // Si no existe el edge, lo creąmos
+        // Si existe el edge, lo borra
         if(edge != null)
         {
             adjacencyList.get(from).remove(edge);
@@ -120,26 +124,28 @@ public class ListGraph<T> implements Graph<T> {
         return false;
     }
 
+    //True si el vértice es una llave en la adjacencyList
     @Override
-    //Chequear esta función
     public boolean containsVertex(T vertex) {
         return adjacencyList.containsKey(vertex);
     }
+
+    //Devuelve la lista de edges del vértice que recibe por parámetro
     @Override
-    //Chequear esta función
     public SimpleList<Edge<T>> getNeighbors(T vertex) {
-        
         return adjacencyList.get(vertex);
     }
 
+    //True si el getEdge() devuelve un edge
     @Override
     public boolean containsEdge(T from, T to) {
         return getEdge(from, to) != null;
     }
 
+
     public int getWeight(T from, T to) {
         Edge<T> targetEdge = getEdge(from, to);
-        if (targetEdge == null) return -1;
+        if (targetEdge == null) return -1; //Si no existe el edge, devuelve -1
         return targetEdge.weight;
     }
 

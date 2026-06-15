@@ -16,33 +16,25 @@ public class DijkstraSolver {
     // Edge<T> = (Previo, Costo)
     public static <T> SimpleDictionary<T, Edge<T>> dijkstraAllNodes(Graph<T> graph, T origin) {
 
-        //Inicializamos el diccionario ("tabla")
+        //Inicializamos el diccionario (la tabla)
         SimpleDictionary<T, Edge<T>> result = new SimpleArrayDictionary<T, Edge<T>>();
 
         //Cargamos todos los vertices del grafo al diccionario
         SimpleList<T> vertices = graph.vertices();
+
+        //Contamos la cantidad de vertices porque después iteramos sobre eso
         int vertexCount = vertices.size();
 
         //Inicializamos todos los edges a: prev null, weight max (esto es por la teoría que vimos en clase)
         for (int i = 0; i < vertexCount; i++)
         {
-            //Inicializo el resultado con todos los vertices y un peso infinito
+            //Inicializo el resultado con todos los vertices, que tienen como previo un null y un peso infinito
             result.put(vertices.get(i), new Edge<T>(null, Integer.MAX_VALUE));
-            // Lo que hace aca es darle valor maximo a cada vertice antes de visitarlo,
-            // Asi se ve el diccionario
-            /*
-            * {
-            * a: 0 -> suponiendo que es el origen.
-            * b:max
-            * c:max
-            * d: max
-            *
-            * }
-            * */
+            // Lo que hace aca es darle valor maximo a cada vertice antes de visitarlo
 
         }
 
-        //Agarra el primer nodo y le asigna peso cero
+        //Agarra el primer nodo (el origen) y le asigna peso cero
         result.get(origin).weight = 0;
 
 
@@ -67,6 +59,7 @@ public class DijkstraSolver {
             int costToCurrent = result.get(current).weight;
 
             //Buscamos todos los vecinos de current (segun el grafo)
+            //Esto te da una lista de edges de ese vertice [destino1, peso1; destino2, peso2;....]
             SimpleList<Edge<T>> neighbors = graph.getNeighbors(current);
             int neighborCount = neighbors.size();
 
@@ -76,7 +69,7 @@ public class DijkstraSolver {
                 //Guardamos el nodo vecino individual
                 T neighbor = neighbors.get(i).destination;
 
-                //Si el nodo que está en este edge ya lo vi, me lo salteo
+                //Si el nodo que está en este edge ya lo vi, me lo salteo (ya hay un camino más barato hacia él)
                 if(visited.contains(neighbors.get(i).destination)) continue;
 
                 //Guardamos el costo total hasta current segun la tabla
@@ -86,11 +79,13 @@ public class DijkstraSolver {
                 unvisited.enqueue(neighbor, totalCost);
 
                 //Si el costo que calculamos es menor al de la tabla
-                //Actualizamos la tabla
 
+                //Actualizamos la tabla: si el costo que calculamos es menor al que está en la tabla (al principio infinito) se actualiza
                 if (totalCost < result.get(neighbor).weight)
                 {
                     //El nodo previo es el current ("destination" es el prev, no confundirse con el siguiente)
+                    //Se llama destination ese elemento porque lo definimos así en la clase edge (destination, weight), pero en la tabla es el nodo previo
+                    //result.get(neighbor) devuelve un Edge
                     result.get(neighbor).destination = current;
 
                     //El costo es el que calculamos

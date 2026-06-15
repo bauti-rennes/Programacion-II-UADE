@@ -4,7 +4,6 @@ import listModule.SimpleList;
 
 public interface Graph<T> {
 
-    //CHEQUEAR CON GRABACION
     public SimpleList<T> vertices();
     public boolean addVertex(T vertex);
     public boolean removeVertex(T vertex);
