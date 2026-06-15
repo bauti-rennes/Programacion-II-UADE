@@ -75,9 +75,9 @@ public class MainProgram {
 				"\n6 - Ejercicio de colas de prioridad" +
 				"\n7 - Ejercicio de diccionarios" +
 				"\n8 - Ejercicio de recursividad" +
-				"\n9 - Ejercicio de Dijkstra" +
-				"\n10 - Leaderboard BST (TP 08)" +
-				"\n11 - Leaderboard AVL (TP 09)")
+				"\n9 - Ejercicio de BST" +
+				"\n10 - Ejercicio de AVL" +
+				"\n11 - Ejercicio de Dijkstra")
 		;
 
 		//Esto es para almacenar en un string lo que puso el usuario
@@ -114,13 +114,13 @@ public class MainProgram {
 			exercise = new RecursionExercise(scanner);
 			break;
 		case "9":
-			exercise = new DijkstraSolverExercise(scanner);
-			break;
-		case "10":
 			exercise = new BSTExercise(scanner);
 			break;
-		case "11":
+		case "10":
 			exercise = new AVLExercise(scanner);
+			break;
+		case "11":
+			exercise = new DijkstraSolverExercise(scanner);
 			break;
 		default:
 			//Esto sería como el "else" de python

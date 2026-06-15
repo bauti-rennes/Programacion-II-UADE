@@ -2,15 +2,15 @@ package treeModule;
 
 import application.Exercise;
 import listModule.SimpleLinkedList;
-
 import java.util.Scanner;
 
 public class BSTExercise extends Exercise {
 
      private int currentPhase = 0;
      private boolean firstTime = true;
+
      // protected para que AVLExercise pueda reemplazarlo por un AVL en su constructor
-     protected BST<ScoreNode> bst; //El árbol BST tiene nodos de tipo ScoreNode
+     protected BST<ScoreNode> bst; //El bst tiene nodos de tipo ScoreNode
 
     public BSTExercise(Scanner scnr) {
         super(scnr);
@@ -20,7 +20,6 @@ public class BSTExercise extends Exercise {
     @Override
     protected void exerciseLogic() {
 
-        //El switch lo copypasteamos de ListExercise porqued va a ser igual
         switch (currentPhase) {
             case 0:
                 menuLogic();
@@ -44,6 +43,7 @@ public class BSTExercise extends Exercise {
 
     }
 
+    //De base entra acá
     private void menuLogic() {
 
         if (firstTime) {
@@ -55,7 +55,7 @@ public class BSTExercise extends Exercise {
                 + "\na: Agregar un puntaje "
                 + "\ne: Eliminar un puntaje "
                 + "\nm: Mostrar todos los puntajes "
-                + "\np: Agregar puntajes de prueba "
+                + "\np: Cargar puntajes de prueba "
                 + "\nb: Borrar todo "
                 + "\nmm: Menú principal");
 
@@ -89,10 +89,8 @@ public class BSTExercise extends Exercise {
 
     }
 
-    //Agregar puntajes(ScoreNodes) al árbol
+    //Agregar ScoreNodes al árbol
     private void addLogic(){
-
-        //TODO agregar funciones while para validacion de inputs
 
         //Llamo a las funciones para setear enemigos, segundos y nombre de jugador (cada una con sus respectivas validaciones)
         Integer enemies_destroyed = setEnemies();
@@ -102,10 +100,10 @@ public class BSTExercise extends Exercise {
         // Creo el ScoreNode con los datos ingresados
         ScoreNode nodeValue = new ScoreNode(enemies_destroyed, seconds, player);
 
-        // Inserto el ScoreNode directamente en el BST (insert() ya se encarga de ubicarlo correctamente)
+        // Inserto el ScoreNode en el bst
         bst.insert(nodeValue);
 
-        System.out.println("\nPuntaje agregado: " + nodeValue.getPlayer() + " - " + nodeValue.getScore());
+        System.out.println("\nPuntaje agregado: \n" + nodeValue.getPlayer() + ": " + nodeValue.getScore() + " puntos");
 
         boolean backToMenu = returnMenu();
 
@@ -126,25 +124,33 @@ public class BSTExercise extends Exercise {
         }
 
         System.out.println("\nIngrese el nombre del jugador a eliminar:");
-        String playerToDelete = scanner.nextLine().trim();
+
+        String playerToDelete = scanner.nextLine().trim(); //Trim elimina los espacios en blanco al principio y al final del string
 
         // Recorremos el árbol en inOrder para buscar el ScoreNode con ese nombre de jugador
+        // Para eso hacemos una lista con todos los NODOS
         SimpleLinkedList<ScoreNode> allScores = bst.inOrder();
+
+        //found cambia de valor si encontramos el jugador
         ScoreNode found = null;
 
+        //iteramos todos los nodos hasta encontrar el que coincida con el nombre del jugador
         for (int i = 0; i < allScores.size(); i++) {
             if (allScores.get(i).getPlayer().equals(playerToDelete)) {
                 found = allScores.get(i);
-                break; // tomamos el primer resultado que coincida
+                break; // Nos guardamos el primer nodo que coincida (el más alto)
             }
         }
 
-        if (found == null) {
+        if (found == null)
+        {
             System.out.println("\nNo se encontró un puntaje para el jugador '" + playerToDelete + "'.");
-        } else {
-            // Usamos el ScoreNode encontrado para que remove() pueda localizarlo exactamente en el árbol
+        }
+        else
+        {
+            // Usamos el nodo encontrado para que remove() pueda encontrarlo exactamente en el árbol
             bst.remove(found);
-            System.out.println("\nPuntaje de '" + playerToDelete + "' eliminado.");
+            System.out.println("\nPuntaje de " + playerToDelete + " eliminado.");
         }
 
         boolean backToMenu = returnMenu();
@@ -153,7 +159,7 @@ public class BSTExercise extends Exercise {
         }
     }
 
-    // Mostrar todos los puntajes ordenados de mayor a menor score (inOrder da ese orden gracias al compareTo)
+    // Mostrar todos los puntajes ordenados de mayor a menor score (inOrder da ese orden gracias a la forma en que hicimos el compareTo)
     private void viewLogic() {
 
         if (bst.isEmpty()) {
@@ -165,11 +171,13 @@ public class BSTExercise extends Exercise {
         SimpleLinkedList<ScoreNode> allScores = bst.inOrder();
 
         System.out.println("\n--- LEADERBOARD ---");
+
+        //iteramos en toda la lista y mostramos el nombre del jugador, puntaje, enemigos y segundos
         for (int i = 0; i < allScores.size(); i++) {
             ScoreNode s = allScores.get(i);
             System.out.println(
-                "#" + (i + 1) + " | " + s.getPlayer()
-                + " | Score: " + s.getScore()
+                "#" + (i + 1) + " | " + s.getPlayer() //El +1 es porque sino arranca por el cero
+                + " | Puntaje: " + s.getScore()
                 + " | Enemigos: " + s.getEnemies_destroyed()
                 + " | Tiempo: " + s.getSeconds() + "s"
             );
@@ -182,22 +190,22 @@ public class BSTExercise extends Exercise {
         }
     }
 
-    // Base de datos pre-programada para facilitar el testeo de la aplicación (requerido por el enunciado)
+    //Agregar valores de ejemplo
     private void addTestValues() {
-        bst.insert(new ScoreNode(50,  30.0f, "Alice"));
-        bst.insert(new ScoreNode(80,  60.0f, "Bob"));
-        bst.insert(new ScoreNode(120, 45.0f, "Carlos"));
-        bst.insert(new ScoreNode(30,  15.0f, "Diana"));
-        bst.insert(new ScoreNode(200, 90.0f, "Eve"));
+        bst.insert(new ScoreNode(50,  30.0f, "Bauti"));
+        bst.insert(new ScoreNode(80,  60.0f, "Fran"));
+        bst.insert(new ScoreNode(120, 45.0f, "Vir"));
+        bst.insert(new ScoreNode(30,  15.0f, "Kevin"));
+        bst.insert(new ScoreNode(200, 90.0f, "Ottoman"));
 
-        System.out.println("\nPuntajes de prueba cargados (5 entradas).");
+        System.out.println("\n5 puntajes de prueba cargados.");
         currentPhase = 0;
     }
 
     // Borrar todos los puntajes del árbol
     private void clearLogic() {
 
-        // Pedimos confirmación antes de borrar para evitar pérdidas accidentales
+        // Pedimos confirmación antes de borrar para evitar borrar todo sin querer
         boolean confirmed = false;
         boolean bandera = true;
 
@@ -226,6 +234,7 @@ public class BSTExercise extends Exercise {
             System.out.println("\nOperación cancelada.");
         }
 
+        //Vuelvo directamente al menú
         currentPhase = 0;
     }
 

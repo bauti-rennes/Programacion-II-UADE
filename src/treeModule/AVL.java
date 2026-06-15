@@ -1,7 +1,8 @@
 package treeModule;
 
+//Extiende comparable para poder comparar valores de los nodos
+//Extiende BST porque es un tipo de BST con funcionalidades extras
 public class AVL<E extends Comparable<E>> extends BST<E> {
-
 
     // Recibe el nodo como estaba antes de insertar
     // Devuelve el nuevo nodo en ese mismo lugar
@@ -32,12 +33,13 @@ public class AVL<E extends Comparable<E>> extends BST<E> {
             current.right = insertRecursive(current.right, value);
         }
 
-        //Si no queremos cuplidacods, cortamos como hacíamos en la clase BST
+        //Si no queremos duplicados, cortamos como hacíamos en la clase BST
+        //No hace falta rebalancear el nodo porque no estamos haciendo ninguna modificacion
         else return current;
 
-        // Si llegamos aca no hubieron cambios
+        // Si llegamos aca no hubo cambios
         // Retornamos el mismo nodo
-        //Lo que cambia con al clase BST es que acá le ponemos el rebalanceNode
+        // Lo que cambia con la clase BST es que acá le ponemos el rebalanceNode
         return rebalanceNode(current);
 
     }
@@ -83,51 +85,59 @@ public class AVL<E extends Comparable<E>> extends BST<E> {
             current.right = removeRecursive(current.right, value);
         }
 
+        //Lo único que cambia con el BST es que rebalanceamos en cada iteracion
         return rebalanceNode(current);
     }
 
     private TreeNode<E> rebalanceNode(TreeNode<E> node)
     {
 
+        //Se fija si es necesario rebalancear
         int bf = getNodeBalanceFactor(node);
 
-        //Casos L
+        //Casos L (el subárbol izq. pesa más que el derecho)
         if(bf > 1)
         {
-            //Caso LL
-
+            //Caso LL (del subarbol izquierdo, pesa más su subarbol izquierdo)
             if (getNodeBalanceFactor(node.left)>= 0)
             {
                 return rotateRight(node);
             }
 
-            //Caso LR
+            //Caso LR (del subarbol izquierdo, pesa más su subarbol derecho)
             else return rotateLeftRight(node);
 
         }
 
-        //Casos R
-        // bf < -1 significa que el subárbol derecho tiene altura 2 o más que el izquierdo
+        //Casos R (el subárbol derecho pesa más que el izquierdo)
         if(bf < -1)
         {
-            //Caso RR
+            //Caso RR (del subárbol derecho, pesa más su subarbol derecho)
             if(getNodeBalanceFactor(node.right) <= 0)
             {
                 return rotateLeft(node);
             }
 
-            //Caso RL
+            //Caso RL (del subárbol derecho, pesa más su subarbol izquierdo)
             else return rotateRightLeft(node);
         }
 
-        //Si el nodo no esta desbalanceado, lo devolvemos igual
+        //Si el nodo no está desbalanceado, no lo modificamos
         return node;
 
     }
 
     private TreeNode<E> rotateRight(TreeNode<E> y) {
 
-        //Variables auxiliares
+        /*
+                    y                   x
+                   /                     \
+                  x        -->            y
+                   \                     /
+                    t2                  t2
+         */
+
+        //Definimos variables auxiliares
         TreeNode<E> x = y.left;
         TreeNode<E> t2 = x.right;
 
@@ -141,10 +151,17 @@ public class AVL<E extends Comparable<E>> extends BST<E> {
 
     private TreeNode<E> rotateLeft(TreeNode<E> x) {
 
-        //Variables auxiliares
+        /*
+                x                    y
+                 \                  /
+                  y      -->       x
+                 /                 \
+               t2                   t2
+         */
+
+        //Uso variables auxiliares
         TreeNode<E> y = x.right;
-        // t2 es el hijo izquierdo de y: después de la rotación pasa a ser el hijo derecho de x
-        // (antes era x.left, lo que era incorrecto — ese es el subárbol A, que no se mueve)
+        // t2 es el hijo izquierdo de y, después de la rotación pasa a ser el hijo derecho de x
         TreeNode<E> t2 = y.left;
 
         //Cambiamos de lugar las referencias
@@ -159,11 +176,34 @@ public class AVL<E extends Comparable<E>> extends BST<E> {
     {
         node.left = rotateLeft(node.left);
         return rotateRight(node);
+
+        /*
+                           node                node
+                          /                    /
+                     node.left                y                    y
+                         \                  /                    /  \
+                          y      -->    node.left  -->   node.left   node
+                         /                 \                   \
+                       t2                   t2                  t2
+         */
+
     }
+
 
     private TreeNode<E> rotateRightLeft(TreeNode<E> node)
     {
         node.right = rotateRight(node.right);
         return rotateLeft(node);
+
+        /*
+                           node                  node
+                             \                      \
+                            node.right                x                         x
+                            /                            \                    /  \
+                           x          -->            node.right  -->       node   node.right
+                            \                          /                         /
+                            t2                       t2                        t2
+         */
+
     }
 }
