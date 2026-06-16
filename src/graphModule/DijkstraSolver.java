@@ -14,6 +14,7 @@ public class DijkstraSolver {
     //Devuelve un diccionario con cada nodo del grafo como key, y un edge con el nodo previo y el peso total hasta ese nodo como value (devuelve la tabla que vimos en clase)
     // T = Nodo
     // Edge<T> = (Previo, Costo)
+    //Esa <T> al lado de static está porque como el métoddo es static no puede usar el T de una clase genérica. Necesito declararlo.
     public static <T> SimpleDictionary<T, Edge<T>> dijkstraAllNodes(Graph<T> graph, T origin) {
 
         //Inicializamos el diccionario (la tabla)
@@ -95,7 +96,6 @@ public class DijkstraSolver {
             //Lo agrego en la lista de visitados así no lo vuelve a recorrer
             visited.add(current);
         }
-        System.out.println("result");
         return result;
     }
 
